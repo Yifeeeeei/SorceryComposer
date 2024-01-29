@@ -28,25 +28,25 @@ html {
 /* Upper and lower parts of the left side */
 .left-side .upper-part {
     height: 20%;
-    background-color: #add8e6; /* Light Blue */
+    background-color: #d7c4bb;
     padding: 10px;
 }
 
 .left-side .lower-part {
     height: 80%;
-    background-color: #90ee90; /* Light Green */
+    background-color: #d7b98e;
     padding: 10px;
 }
 
 /* Upper and lower parts of the right side */
 .right-side .upper-part {
     height: 20%;
-    background-color: #ffb6c1; /* Light Pink */
+    background-color: #dac9a6;
     padding: 10px;
 }
 
 .right-side .lower-part {
     height: 80%;
-    background-color: #f0e68c; /* Khaki */
+    background-color: #d9cd90;
     padding: 10px;
 }
