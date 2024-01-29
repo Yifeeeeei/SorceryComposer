@@ -1,0 +1,52 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.left-side,
+.right-side {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-side {
+    width: 80%;
+}
+
+.right-side {
+    width: 20%;
+}
+
+/* Upper and lower parts of the left side */
+.left-side .upper-part {
+    height: 20%;
+    background-color: #add8e6; /* Light Blue */
+    padding: 10px;
+}
+
+.left-side .lower-part {
+    height: 80%;
+    background-color: #90ee90; /* Light Green */
+    padding: 10px;
+}
+
+/* Upper and lower parts of the right side */
+.right-side .upper-part {
+    height: 20%;
+    background-color: #ffb6c1; /* Light Pink */
+    padding: 10px;
+}
+
+.right-side .lower-part {
+    height: 80%;
+    background-color: #f0e68c; /* Khaki */
+    padding: 10px;
+}
