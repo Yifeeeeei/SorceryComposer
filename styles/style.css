@@ -28,26 +28,75 @@ html {
 /* Upper and lower parts of the left side */
 .left-side .upper-part {
     height: 20%;
-    background-color: #d7c4bb;
+    background-color: #f9ebed;
     padding: 10px;
-}
-
-.left-side .lower-part {
-    height: 80%;
-    background-color: #d7b98e;
-    padding: 10px;
-    overflow-y: auto; /* This will add a scrollbar if the content overflows */
 }
 
 /* Upper and lower parts of the right side */
 .right-side .upper-part {
     height: 20%;
-    background-color: #dac9a6;
+    background-color: #fae8e9;
     padding: 10px;
 }
 
 .right-side .lower-part {
     height: 80%;
-    background-color: #d9cd90;
+    background-color: #f6e5d6;
     padding: 10px;
+}
+
+.left-side .lower-part {
+    height: 80%;
+    background-color: #f9eedd;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#collections_list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.card {
+    /* background-color: #dac9a6; */
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 4px;
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    background-color: antiquewhite;
+}
+
+.ele_none {
+    border-color: #ffffff;
+}
+.ele_water {
+    border-color: #5ed7ff;
+}
+.ele_fire {
+    border-color: #ff4848;
+}
+.ele_air {
+    border-color: #f77be2;
+}
+.ele_earth {
+    border-color: #624b30;
+}
+.ele_light {
+    border-color: #ffff5a;
+}
+.ele_dark {
+    border-color: #000000;
+}
+.ele_unknown {
+    background-color: #00f128;
 }
