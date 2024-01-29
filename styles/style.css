@@ -36,6 +36,7 @@ html {
     height: 80%;
     background-color: #d7b98e;
     padding: 10px;
+    overflow-y: auto; /* This will add a scrollbar if the content overflows */
 }
 
 /* Upper and lower parts of the right side */
