@@ -8,6 +8,7 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="scripts/global_vars.js"></script>
+        <script src="scripts/filters.js"></script>
         <script src="scripts/utils.js"></script>
         <script src="scripts/main.js"></script>
     </head>
@@ -16,7 +17,13 @@
             <div class="left-side">
                 <div class="upper-part">
                     <!-- Content for the upper left side goes here -->
-                    <p>filters</p>
+                    <input type="text" id="input_filter" />
+                    <button
+                        id="button_filter"
+                        onclick="button_filter_clicked()"
+                    >
+                        Filt!
+                    </button>
                 </div>
                 <div class="lower-part" id="collections">
                     <!-- Content for the lower left side goes here -->
