@@ -72,13 +72,15 @@ html {
 
 .card {
     /* background-color: #dac9a6; */
-    margin: 10px;
-    padding: 20px;
+    margin: 0.5%;
+    padding: 1%;
     border-radius: 10px;
     border-style: solid;
     border-width: 4px;
-    width: 230px;
-    height: 400px;
+    /* width: 230px;
+    height: 400px; */
+    width: 16%;
+    height: 25%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* overflow-y: auto; */
     background-color: antiquewhite;
