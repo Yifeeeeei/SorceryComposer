@@ -10,10 +10,20 @@ function encode(numbers) {
 
 function decode(encoded) {
     let numbers = [];
+    encoded = encoded.replaceAll("//", " ");
 
-    numbers = encoded.split(" ");
+    numbers = encoded.split(/(\s+)/).filter(function (e) {
+        return e.trim().length > 0;
+    });
+
     for (let i = 0; i < numbers.length; i++) {
-        numbers[i] = parseInt(numbers[i]);
+        try {
+            numbers[i] = parseInt(numbers[i]);
+        } catch (err) {
+            alert("Invalid deck code: " + numbers[i] + " is not a number!");
+            numbers.splice(i, 1);
+            i--;
+        }
     }
     return numbers;
 }
@@ -80,6 +90,7 @@ function show_decks() {
 
 function onclick_button_build(event) {
     const card_numbers = decode(input_deck_code.value);
+    console.log(card_numbers);
     current_deck = { main: [], ability: [], extra: [] };
     for (let i = 0; i < card_numbers.length; i++) {
         if (card_number_to_idx[card_numbers[i]] == undefined) {
