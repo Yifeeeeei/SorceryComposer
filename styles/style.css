@@ -250,7 +250,7 @@ html {
     width: 30%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    height: 60%;
+    /* height: 60%; */
     background-color: #f9dfd7;
     border-radius: 10px;
     border-style: solid;
