@@ -18,11 +18,11 @@ html {
 }
 
 .left-side {
-    width: 80%;
+    width: 85%;
 }
 
 .right-side {
-    width: 20%;
+    width: 15%;
 }
 
 /* Upper and lower parts of the left side */
@@ -76,16 +76,16 @@ html {
     border-radius: 10px;
     border-style: solid;
     border-width: 4px;
-    width: 200px;
-    height: 350px;
+    width: 230px;
+    height: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
+    /* overflow-y: auto; */
     background-color: antiquewhite;
 }
 
 .card_img {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: contain;
 }
 
@@ -138,4 +138,36 @@ html {
 
 #button_filter:hover {
     background-color: #f8b9ee;
+}
+
+.card_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* This ensures the content is aligned in the center vertically */
+}
+
+.card_name {
+    /* If you need the .card_name to take up the remaining space, you can use flex-grow */
+    flex-grow: 1;
+}
+
+#shader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+.zoom {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: auto;
+    height: 80%;
+    object-fit: contain;
 }

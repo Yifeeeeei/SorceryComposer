@@ -2,6 +2,12 @@ function hello_utils() {
     console.log("Hello from utils.js");
 }
 
+function sort_cards_by_number(card_infos) {
+    card_infos.sort((a, b) => {
+        return a.number - b.number;
+    });
+}
+
 async function readJsonFile(jsonPath) {
     try {
         const response = await fetch(jsonPath);
@@ -68,11 +74,13 @@ function get_discription_element_by_card_info(card_info) {
 }
 
 function hide_element(element) {
-    element.style.visibility = "hidden";
+    element.setAttribute("hidden", "true");
     return element;
 }
 function show_element(element) {
-    element.style.visibility = "visible";
+    if (element.hasAttribute("hidden")) {
+        element.removeAttribute("hidden");
+    }
     return element;
 }
 
@@ -80,18 +88,79 @@ function get_dummy_img_src(card_info) {
     return "resources/dummy.jpg";
 }
 
+function get_image_src(card_info) {
+    dic = {
+        "?": "无",
+        火: "火",
+        水: "水",
+        气: "气",
+        地: "地",
+        光: "光",
+        暗: "暗",
+    };
+
+    return (
+        "https://yifeeeeei.github.io/SorceryImages/images/" +
+        card_info.type +
+        "/" +
+        dic[card_info.category] +
+        "/" +
+        card_info.number +
+        "_" +
+        card_info.name +
+        ".jpg"
+    );
+}
+
 function get_img_element_by_card_info(card_info) {
     const img_element = document.createElement("img");
     img_element.className = "card_img";
-    img_element.src = get_dummy_img_src(card_info);
+    // img_element.src = get_dummy_img_src(card_info);
+    img_element.src = get_image_src(card_info);
+    img_element.setAttribute("card_number", card_info.number);
+    img_element.onclick = onclick_img_element;
     return img_element;
+}
+
+function onclick_img_element(event) {
+    // clear shader's children
+    show_element(shader);
+    shader.innerHTML = "";
+    let card_src = event.target.src;
+    let zoom_img = document.createElement("img");
+    zoom_img.className = "zoom";
+    zoom_img.src = card_src;
+    shader.appendChild(zoom_img);
+}
+
+function onclick_shader(event) {
+    hide_element(shader);
+    shader.innerHTML = "";
+}
+
+function get_header_element_by_card_info(card_info) {
+    let header_div = document.createElement("div");
+    header_div.className = "card_header";
+
+    let name_div = document.createElement("div");
+    name_div.className = "card_name";
+    name_div.innerHTML = "<strong>" + card_info.name + "</strong>";
+
+    let add_button = document.createElement("button");
+    add_button.className = "card_add_button";
+    add_button.innerHTML = "+";
+    add_button.setAttribute("card_number", card_info.number);
+
+    header_div.appendChild(name_div);
+    header_div.appendChild(add_button);
+    return header_div;
 }
 
 function get_card_element_by_card_info(card_info) {
     const card_div = document.createElement("li");
-    card_div.className = "card" + " " + get_class_name_by_card_info(card_info);
-    card_div.id = card_info.number;
-    card_div.innerHTML = card_info.name;
+    card_div.className = "card";
+    const header_div = get_header_element_by_card_info(card_info);
+    card_div.appendChild(header_div);
     // 卡牌图片
     const img_element = get_img_element_by_card_info(card_info);
 
