@@ -32,6 +32,28 @@ async function setup() {
     deck_ability = document.getElementById("deck_ability");
     deck_extra = document.getElementById("deck_extra");
 
+    // change default enter for input filter
+    let input_filt = document.getElementById("input_filter");
+    input_filt.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            // 13 is the key code for Enter
+            console.log("Enter pressed");
+            event.preventDefault(); // Prevent the default action to stop form submission
+            button_filter_clicked(); // Trigger the button's click event
+        }
+    });
+
+    // change default enter for input deck code
+    let input_deck = document.getElementById("input_deck_code");
+    input_deck.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            // 13 is the key code for Enter
+            console.log("Enter pressed");
+            event.preventDefault(); // Prevent the default action to stop form submission
+            onclick_button_build(); // Trigger the button's click event
+        }
+    });
+
     // set up input_deck_code
     input_deck_code = document.getElementById("input_deck_code");
     // set up button_build
