@@ -15,6 +15,30 @@
     </head>
     <body>
         <div id="shader" hidden onclick="onclick_shader()"></div>
+        <div id="popup" hidden>
+            <div id="popup_hint" hidden>
+                <ul>
+                    <strong>如何使用过滤器</strong>
+                    <li>
+                        关键词过滤器：直接输入关键词，过滤留下在名称，标签，描述中包含关键词的卡牌
+                    </li>
+                    <li>元素过滤器："elem:" + ?/火/水/气/地/光/暗</li>
+                    <li>类别过滤取："type:" + 生物/技能/道具/英雄</li>
+                    <li>费用过滤器："cost:" + 对应费用</li>
+                    <li>
+                        过滤器组合：用分号";"组合不同的过滤器，过滤器之间为与的关系
+                    </li>
+                    <li>空白字符会自动被跳过，中英文符号不区分</li>
+                </ul>
+                <ul>
+                    <strong>示例</strong>
+                    <li>elem:火;type:生物;cost:3;</li>
+                    <li>传奇;龙</li>
+                    <li>type:技能;风暴之怒</li>
+                </ul>
+            </div>
+        </div>
+        <img id="popup_img" hidden />
 
         <div class="container">
             <div class="left-side">
@@ -27,12 +51,10 @@
                     >
                         Filt!
                     </button>
+                    <div id="hint"><u>Hint</u></div>
                 </div>
                 <div class="lower-part" id="collections">
-                    <!-- Content for the lower left side goes here -->
-                    <ul id="collections_list">
-                        <!-- collections -->
-                    </ul>
+                    <ul id="collections_list"></ul>
                 </div>
             </div>
             <div class="right-side">

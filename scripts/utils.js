@@ -38,6 +38,14 @@ function show_cards() {
     }
 }
 
+function mouseover_card_name_element(event) {
+    popup_img.setAttribute("src", event.target.getAttribute("img_src"));
+    show_element(popup_img);
+}
+function mouseout_card_name_element(event) {
+    hide_element(popup_img);
+}
+
 function show_decks() {
     const deck_elements = [deck_main, deck_ability, deck_extra];
     const deck_list = ["main", "ability", "extra"];
@@ -54,6 +62,14 @@ function show_decks() {
             card_name_ele.setAttribute("img_src", get_image_src(card_info));
             card_name_ele.innerHTML = card_info.name;
             card_name_ele.onclick = onclick_deck_card_name;
+            card_name_ele.addEventListener(
+                "mouseover",
+                mouseover_card_name_element
+            );
+            card_name_ele.addEventListener(
+                "mouseout",
+                mouseout_card_name_element
+            );
 
             if (is_legend(card_info)) {
                 card_name_ele.innerHTML += " ✡";

@@ -140,6 +140,11 @@ html {
 #button_filter:hover {
     background-color: #f8b9ee;
 }
+#hint {
+    width: 10%;
+    height: 30px;
+    text-align: center;
+}
 
 .card_header {
     display: flex;
@@ -234,4 +239,30 @@ html {
 }
 #button_export:hover {
     background-color: #c693b4;
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    height: 60%;
+    background-color: #f9dfd7;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+    padding: 10px;
+}
+#popup_img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    height: auto;
+    transform: translate(-50%, -50%);
+
+    object-fit: contain;
 }

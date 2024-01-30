@@ -9,3 +9,6 @@ var deck_extra;
 var card_number_to_idx = {};
 var input_deck_code;
 var button_build;
+var popup;
+var popup_hint;
+var popup_img;
