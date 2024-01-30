@@ -125,16 +125,22 @@ function onclick_button_build(event) {
 
 function onclick_button_export(event) {
     let card_numbers = [];
+    let encoded = "";
     for (let i = 0; i < current_deck["main"].length; i++) {
         card_numbers.push(current_deck["main"][i].number);
     }
+    encoded = encoded + encode(card_numbers) + " // ";
+    card_numbers = [];
     for (let i = 0; i < current_deck["ability"].length; i++) {
         card_numbers.push(current_deck["ability"][i].number);
     }
+    encoded = encoded + encode(card_numbers) + " // ";
+    card_numbers = [];
     for (let i = 0; i < current_deck["extra"].length; i++) {
         card_numbers.push(current_deck["extra"][i].number);
     }
-    let encoded = encode(card_numbers);
+    encoded = encoded + encode(card_numbers);
+
     input_deck_code.value = encoded;
 
     navigator.clipboard.writeText(encoded).then(function (x) {
