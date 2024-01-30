@@ -158,7 +158,7 @@ function get_header_element_by_card_info(card_info) {
 
 function get_card_element_by_card_info(card_info) {
     const card_div = document.createElement("li");
-    card_div.className = "card";
+    card_div.className = "card" + " " + get_class_name_by_card_info(card_info);
     const header_div = get_header_element_by_card_info(card_info);
     card_div.appendChild(header_div);
     // 卡牌图片
