@@ -38,11 +38,31 @@
             <div class="right-side">
                 <div class="upper-part">
                     <!-- Content for the upper right side goes here -->
-                    <p>navigations</p>
+                    <input type="text" id="input_deck_code" />
+                    <button id="button_build" onclick="onclick_button_build()">
+                        Build
+                    </button>
+                    <button
+                        id="button_export"
+                        onclick="onclick_button_export()"
+                    >
+                        Export
+                    </button>
                 </div>
                 <div class="lower-part">
                     <!-- Content for the lower right side goes here -->
-                    <p>current deck</p>
+                    <p class="deck_header" id="main_header">
+                        <strong>MAIN 0/30</strong>
+                    </p>
+                    <div id="deck_main"></div>
+                    <p class="deck_header" id="ability_header">
+                        <strong>ABILITY 0/12</strong>
+                    </p>
+                    <div id="deck_ability"></div>
+                    <p class="deck_header" id="extra_header">
+                        <strong>EXTRA 0</strong>
+                    </p>
+                    <div id="deck_extra"></div>
                 </div>
             </div>
         </div>

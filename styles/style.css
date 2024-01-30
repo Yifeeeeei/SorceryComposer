@@ -27,7 +27,7 @@ html {
 
 /* Upper and lower parts of the left side */
 .left-side .upper-part {
-    height: 20%;
+    height: 10%;
     background-color: #f9ebed;
     padding: 10px;
     display: flex;
@@ -40,19 +40,20 @@ html {
 
 /* Upper and lower parts of the right side */
 .right-side .upper-part {
-    height: 20%;
+    height: 10%;
     background-color: #fae8e9;
     padding: 10px;
 }
 
 .right-side .lower-part {
-    height: 80%;
+    height: 90%;
     background-color: #f6e5d6;
     padding: 10px;
+    overflow-y: auto;
 }
 
 .left-side .lower-part {
-    height: 80%;
+    height: 90%;
     background-color: #f9eedd;
     padding: 10px;
     overflow-y: auto;
@@ -170,4 +171,67 @@ html {
     width: auto;
     height: 80%;
     object-fit: contain;
+}
+
+.deck_header {
+    border: #000000 1px solid;
+    margin-top: 5px;
+    text-align: center;
+    font-size: large;
+}
+.deck_card {
+    border-bottom: #000000 1px solid;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.deck_card_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right-side .upper-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#input_deck_code {
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+    margin-bottom: 10px;
+    flex-grow: 1;
+}
+#button_build {
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+    margin-bottom: 10px;
+    background-color: #f9dfd7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#button_build:hover {
+    background-color: #e6a2a2;
+}
+#button_export {
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+    margin-bottom: 10px;
+    background-color: #ffd4f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-left: 5px;
+}
+#button_export:hover {
+    background-color: #c693b4;
 }

@@ -2,6 +2,138 @@ function hello_utils() {
     console.log("Hello from utils.js");
 }
 
+function encode(numbers) {
+    // join by space
+    let encoded = numbers.join(" ");
+    return encoded;
+}
+
+function decode(encoded) {
+    let numbers = [];
+
+    numbers = encoded.split(" ");
+    for (let i = 0; i < numbers.length; i++) {
+        numbers[i] = parseInt(numbers[i]);
+    }
+    return numbers;
+}
+
+// this function will display all cards in displaying_card_infos onto the page
+function show_cards() {
+    for (let i = 0; i < displaying_card_infos.length; i++) {
+        const card_info = displaying_card_infos[i];
+        let card_ele = get_card_element_by_card_info(card_info, i);
+        card_ele.setAttribute("idx", i);
+        document.getElementById("collections_list").appendChild(card_ele);
+    }
+}
+
+function show_decks() {
+    const deck_elements = [deck_main, deck_ability, deck_extra];
+    const deck_list = ["main", "ability", "extra"];
+    for (let i = 0; i < 3; i++) {
+        deck_elements[i].innerHTML = "";
+        for (let j = 0; j < current_deck[deck_list[i]].length; j++) {
+            const card_info = current_deck[deck_list[i]][j];
+            let deck_card_container = document.createElement("div");
+            deck_card_container.className = "deck_card_container";
+
+            let card_name_ele = document.createElement("div");
+            card_name_ele.setAttribute("idx", j);
+            card_name_ele.setAttribute("card_number", card_info.number);
+            card_name_ele.setAttribute("img_src", get_image_src(card_info));
+            card_name_ele.innerHTML = card_info.name;
+            card_name_ele.onclick = onclick_deck_card_name;
+
+            if (is_legend(card_info)) {
+                card_name_ele.innerHTML += " ✡";
+            }
+            card_name_ele.className = "deck_card";
+            deck_card_container.appendChild(card_name_ele);
+            let deck_minus_button = document.createElement("button");
+            deck_minus_button.innerHTML = "-";
+            deck_minus_button.className = "deck_minus_button";
+            deck_minus_button.setAttribute("deck_name", deck_list[i]);
+            deck_minus_button.setAttribute("idx", j);
+            deck_minus_button.onclick = onclick_deck_minus_button;
+
+            deck_card_container.appendChild(deck_minus_button);
+
+            deck_elements[i].appendChild(deck_card_container);
+        }
+    }
+    document.getElementById("main_header").innerHTML =
+        "<strong>" +
+        "MAIN " +
+        current_deck["main"].length +
+        "/30" +
+        "</strong>";
+    document.getElementById("ability_header").innerHTML =
+        "<strong>" +
+        "ABILITY " +
+        current_deck["ability"].length +
+        "/12" +
+        "</strong>";
+    document.getElementById("extra_header").innerHTML =
+        "<strong>" + "EXTRA " + current_deck["extra"].length + "</strong>";
+}
+
+function onclick_button_build(event) {
+    const card_numbers = decode(input_deck_code.value);
+    current_deck = { main: [], ability: [], extra: [] };
+    for (let i = 0; i < card_numbers.length; i++) {
+        if (card_number_to_idx[card_numbers[i]] == undefined) {
+            alert("Invalid deck code!");
+            return;
+        }
+        const card_info = all_card_infos[card_number_to_idx[card_numbers[i]]];
+        const deck = find_deck_for_card(card_info);
+        current_deck[deck].push(card_info);
+    }
+    sort_cards_by_number(current_deck["main"]);
+    sort_cards_by_number(current_deck["ability"]);
+    sort_cards_by_number(current_deck["extra"]);
+    show_decks();
+}
+
+function onclick_button_export(event) {
+    let card_numbers = [];
+    for (let i = 0; i < current_deck["main"].length; i++) {
+        card_numbers.push(current_deck["main"][i].number);
+    }
+    for (let i = 0; i < current_deck["ability"].length; i++) {
+        card_numbers.push(current_deck["ability"][i].number);
+    }
+    for (let i = 0; i < current_deck["extra"].length; i++) {
+        card_numbers.push(current_deck["extra"][i].number);
+    }
+    let encoded = encode(card_numbers);
+    input_deck_code.value = encoded;
+
+    navigator.clipboard.writeText(encoded).then(function (x) {
+        alert("Deck code copied to clipboard");
+    });
+    // alert("Deck code copied to clipboard!");
+}
+
+function onclick_deck_card_name(event) {
+    // clear shader's children
+    show_element(shader);
+    shader.innerHTML = "";
+    let card_src = event.target.getAttribute("img_src");
+    let zoom_img = document.createElement("img");
+    zoom_img.className = "zoom";
+    zoom_img.src = card_src;
+    shader.appendChild(zoom_img);
+}
+
+function onclick_deck_minus_button(event) {
+    const deck_name = event.target.getAttribute("deck_name");
+    const idx = event.target.getAttribute("idx");
+    current_deck[deck_name].splice(idx, 1);
+    show_decks();
+}
+
 function sort_cards_by_number(card_infos) {
     card_infos.sort((a, b) => {
         return a.number - b.number;
@@ -138,7 +270,28 @@ function onclick_shader(event) {
     shader.innerHTML = "";
 }
 
-function get_header_element_by_card_info(card_info) {
+function find_deck_for_card(card_info) {
+    if (card_info.type == "英雄" || card_info.tag.includes("衍生")) {
+        return "extra";
+    } else if (card_info.type == "技能") {
+        return "ability";
+    } else if (card_info.type == "生物" || card_info.type == "道具") {
+        return "main";
+    } else {
+        return "extra";
+    }
+}
+
+function onclick_add_button(event) {
+    const idx = event.target.getAttribute("idx");
+    const card_info = displaying_card_infos[idx];
+    const deck = find_deck_for_card(card_info);
+    current_deck[deck].push(card_info);
+    sort_cards_by_number(current_deck[deck]);
+    show_decks();
+}
+
+function get_header_element_by_card_info(card_info, idx) {
     let header_div = document.createElement("div");
     header_div.className = "card_header";
 
@@ -150,16 +303,18 @@ function get_header_element_by_card_info(card_info) {
     add_button.className = "card_add_button";
     add_button.innerHTML = "+";
     add_button.setAttribute("card_number", card_info.number);
+    add_button.setAttribute("idx", idx);
+    add_button.onclick = onclick_add_button;
 
     header_div.appendChild(name_div);
     header_div.appendChild(add_button);
     return header_div;
 }
 
-function get_card_element_by_card_info(card_info) {
+function get_card_element_by_card_info(card_info, idx) {
     const card_div = document.createElement("li");
     card_div.className = "card" + " " + get_class_name_by_card_info(card_info);
-    const header_div = get_header_element_by_card_info(card_info);
+    const header_div = get_header_element_by_card_info(card_info, idx);
     card_div.appendChild(header_div);
     // 卡牌图片
     const img_element = get_img_element_by_card_info(card_info);

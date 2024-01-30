@@ -1,13 +1,3 @@
-// this function will display all cards in displaying_card_infos onto the page
-function show_cards() {
-    for (let i = 0; i < displaying_card_infos.length; i++) {
-        const card_info = displaying_card_infos[i];
-        let card_ele = get_card_element_by_card_info(card_info);
-        card_ele.setAttribute("idx", i);
-        document.getElementById("collections_list").appendChild(card_ele);
-    }
-}
-
 // setting up everything for the first time
 async function setup() {
     // read the files
@@ -21,6 +11,20 @@ async function setup() {
 
     // set shader
     shader = document.getElementById("shader");
+    // set decks
+    deck_main = document.getElementById("deck_main");
+    deck_ability = document.getElementById("deck_ability");
+    deck_extra = document.getElementById("deck_extra");
+
+    // set up input_deck_code
+    input_deck_code = document.getElementById("input_deck_code");
+    // set up button_build
+    button_build = document.getElementById("button_build");
+
+    // set up card_number_to_idx
+    for (let i = 0; i < all_card_infos.length; i++) {
+        card_number_to_idx[all_card_infos[i].number] = i;
+    }
 }
 
 function main() {
