@@ -12,3 +12,6 @@ var button_build;
 var popup;
 var popup_hint;
 var popup_img;
+var card_width = "200px";
+var card_height = "330px";
+var zoom_ratio = 1.25;

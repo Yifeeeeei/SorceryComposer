@@ -77,10 +77,9 @@ html {
     border-radius: 10px;
     border-style: solid;
     border-width: 4px;
-    /* width: 230px;
-    height: 400px; */
-    width: 16%;
-    height: 25%;
+
+    /* width: 200px;
+    height: 330px; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* overflow-y: auto; */
     background-color: antiquewhite;
@@ -146,6 +145,21 @@ html {
     width: 10%;
     height: 30px;
     text-align: center;
+}
+
+#zoomin,
+#zoomout {
+    /* width: 10%; */
+    height: 30px;
+    text-align: center;
+    margin-bottom: 1%;
+    margin-left: 1%;
+}
+#zoomin:hover,
+#zoomout:hover {
+    border: #ffa9e2 0px solid;
+    border-radius: 4px;
+    background-color: #f8b9ee;
 }
 
 .card_header {

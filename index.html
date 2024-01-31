@@ -42,6 +42,7 @@
                     <li>点击左侧图片，将它放大</li>
                     <li>点击右侧卡牌名称旁的-，将其从卡组中移除</li>
                     <li>鼠标移动至右侧卡牌名称，自动显示完整卡牌</li>
+                    <li>使用放大镜按钮放大缩小预览卡牌大小</li>
                 </ul>
                 <ul>
                     <strong>导入和导出</strong>
@@ -67,6 +68,18 @@
                     >
                         Filt!
                     </button>
+                    <img
+                        src="zoomin.svg"
+                        id="zoomin"
+                        alt=""
+                        onclick="onclick_zoomin()"
+                    />
+                    <img
+                        src="zoomout.svg"
+                        id="zoomout"
+                        alt=""
+                        onclick="onclick_zoomout()"
+                    />
                     <div id="hint"><u>Hint</u></div>
                 </div>
                 <div class="lower-part" id="collections">

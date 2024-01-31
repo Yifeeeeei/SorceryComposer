@@ -349,6 +349,9 @@ function get_card_element_by_card_info(card_info, idx) {
     card_div.className = "card" + " " + get_class_name_by_card_info(card_info);
     const header_div = get_header_element_by_card_info(card_info, idx);
     card_div.appendChild(header_div);
+
+    card_div.style.width = card_width;
+    card_div.style.height = card_height;
     // 卡牌图片
     const img_element = get_img_element_by_card_info(card_info);
 
@@ -379,4 +382,28 @@ function button_filter_clicked() {
     document.getElementById("collections_list").innerHTML = "";
     // show all cards
     show_cards();
+}
+
+function onclick_zoomin() {
+    const current_width = parseInt(card_width.slice(0, -2));
+    const current_height = parseInt(card_height.slice(0, -2));
+    card_width = Math.ceil(current_width * zoom_ratio).toString() + "px";
+    card_height = Math.ceil(current_height * zoom_ratio).toString() + "px";
+    var all_cards = document.getElementsByClassName("card");
+    for (let i = 0; i < all_cards.length; i++) {
+        all_cards[i].style.width = card_width;
+        all_cards[i].style.height = card_height;
+    }
+}
+
+function onclick_zoomout() {
+    const current_width = parseInt(card_width.slice(0, -2));
+    const current_height = parseInt(card_height.slice(0, -2));
+    card_width = Math.floor(current_width / zoom_ratio).toString() + "px";
+    card_height = Math.floor(current_height / zoom_ratio).toString() + "px";
+    var all_cards = document.getElementsByClassName("card");
+    for (let i = 0; i < all_cards.length; i++) {
+        all_cards[i].style.width = card_width;
+        all_cards[i].style.height = card_height;
+    }
 }
