@@ -304,11 +304,8 @@ function onclick_shader(event) {
 }
 
 function find_deck_for_card(card_info) {
-    if (
-        card_info.type == "英雄" ||
-        card_info.tag.includes("衍生") ||
-        card_info.tag.includes("星象图")
-    ) {
+    // 衍生物第三位为0
+    if (card_info.number[2] == 0) {
         return "extra";
     } else if (card_info.type == "技能") {
         return "ability";
