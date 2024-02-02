@@ -9,9 +9,11 @@ var deck_extra;
 var card_number_to_idx = {};
 var input_deck_code;
 var button_build;
-var popup;
+
 var popup_hint;
 var popup_img;
 var card_width = "200px";
 var card_height = "330px";
 var zoom_ratio = 1.25;
+var zoom_img;
+var popup_keywords;

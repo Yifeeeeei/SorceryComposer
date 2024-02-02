@@ -259,20 +259,21 @@ html {
     background-color: #c693b4;
 }
 
-#popup {
+#popup_hint {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 30%;
+    max-width: 60%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    /* height: 60%; */
+    max-height: 70%;
     background-color: #f9dfd7;
     border-radius: 10px;
     border-style: solid;
     border-width: 1px;
     border-color: #000000;
     padding: 10px;
+    overflow-y: auto;
 }
 #popup_img {
     position: fixed;
@@ -283,4 +284,26 @@ html {
     transform: translate(-50%, -50%);
 
     object-fit: contain;
+}
+#keywords {
+    width: 10%;
+    height: 30px;
+    text-align: center;
+}
+
+#popup_keywords {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    max-height: 70%;
+    background-color: #f9dfd7;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+    padding: 10px;
+    overflow-y: auto;
 }

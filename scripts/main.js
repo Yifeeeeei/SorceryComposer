@@ -1,16 +1,6 @@
 // setting up everything for the first time
 
 // bind show_hint to hint text
-function show_hint() {
-    show_element(popup);
-    show_element(popup_hint);
-    hide_element(popup_img);
-}
-function hide_hint() {
-    hide_element(popup);
-    hide_element(popup_hint);
-    hide_element(popup_img);
-}
 
 async function setup() {
     // read the files
@@ -65,12 +55,12 @@ async function setup() {
     }
 
     // setup popups
-    popup = document.getElementById("popup");
+    // popup = document.getElementById("popup");
     popup_hint = document.getElementById("popup_hint");
     popup_img = document.getElementById("popup_img");
 
-    document.getElementById("hint").addEventListener("mouseover", show_hint);
-    document.getElementById("hint").addEventListener("mouseout", hide_hint);
+    zoom_img = document.getElementById("zoom_img");
+    popup_keywords = document.getElementById("popup_keywords");
 }
 
 function main() {
