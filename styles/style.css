@@ -144,7 +144,7 @@ html {
     background-color: #f8b9ee;
 }
 #hint {
-    width: 10%;
+    width: 5%;
     height: 30px;
     text-align: center;
 }
@@ -286,7 +286,12 @@ html {
     object-fit: contain;
 }
 #keywords {
-    width: 10%;
+    width: 5%;
+    height: 30px;
+    text-align: center;
+}
+#rules {
+    width: 5%;
     height: 30px;
     text-align: center;
 }
