@@ -57,90 +57,6 @@
         </div>
         <!-- </div> -->
         <img id="popup_img" hidden />
-        <div id="popup_keywords" hidden>
-            <ul>
-                <strong>关键词</strong>
-                <li>
-                    <strong>消耗</strong
-                    >将该卡牌横置表示该卡牌已消耗，在持有者回合结束其所有卡牌会重置，所有卡牌入场自动进入消耗状态
-                </li>
-                <li>
-                    <strong>献祭</strong
-                    >将场上卡牌送去弃牌堆来触发的效果，可以献祭已经被消耗的卡牌及其上负载元素
-                </li>
-                <li>
-                    <strong>巨型</strong>巨型生物无论在何处均处于法术攻击范围内
-                </li>
-                <li><strong>祈咒</strong>在持有者回合开始自动触发的效果</li>
-                <li><strong>冷却</strong>该卡牌需要额外的回合数来重置</li>
-                <li>
-                    <strong>衍生</strong
-                    >计入卡组和法术池数量，也不占用技能槽位的卡牌。衍生技能在生物在入场时自动学习，在生物死亡时消失
-                </li>
-                <li>
-                    <strong>临时</strong>临时获得的元素将在你的回合结束时消失
-                </li>
-                <li><strong>精通X</strong>被消耗X次之后，触发相应效果</li>
-                <li>
-                    <strong>吞噬</strong
-                    >具有吞噬的卡牌在入场时不消耗元素，改为需要献祭相应数量的元素；或者指明需要献祭特殊卡牌来入场
-                </li>
-                <li>
-                    <strong>回合技X</strong
-                    >一回合最多使用X次的效果，默认为1，重新入场会重置
-                </li>
-                <li>
-                    <strong>绝技</strong
-                    >这张卡在场上存在的期间内最多使用一次的效果，重新入场会重置
-                </li>
-                <li><strong>速攻</strong>卡牌入场时不会消耗</li>
-                <li>
-                    <strong>异能</strong
-                    >异能咒术自动具有速攻，且在持续时间结束后回到法术池
-                </li>
-                <li>
-                    <strong>点燃</strong>点燃的单位在回合结束受到1点火焰伤害
-                </li>
-                <li><strong>冻结</strong>被冻结的单位的负载视为空</li>
-                <li><strong>晕眩</strong>被晕眩的单位不能被消耗</li>
-                <li><strong>石化</strong>被石化的单位效果视为空</li>
-                <li>
-                    <strong>封印</strong
-                    >被封印的技能无法使用，冷却回合也不会降低
-                </li>
-                <li><strong>诅咒</strong>由卡牌效果附加的负面效果</li>
-                <li>
-                    <strong>虚弱</strong>物处于虚弱时所有法术威力下降虚弱的数值
-                </li>
-
-                <li>
-                    <strong>永生</strong
-                    >永生生物在死亡不会离场，而将其翻面，在你的回合结束在上面放置1个永生标记物，当数量达到其生命值将标记物全部移除使其复活
-                </li>
-                <li>
-                    <strong>隐蔽</strong
-                    >隐蔽的单位不会收到法术伤害，可以越过其进行攻击
-                </li>
-                <li>
-                    <strong>地形</strong
-                    >地形牌放置在生物区域，对其内部和周围的单位生效。同一格只能有1个地形。记述为可摧毁的地形在该区域受到攻击成功后会被破坏
-                </li>
-                <li>
-                    <strong>障碍</strong>具有障碍特性的地形牌上不能再放置生物
-                </li>
-                <li>
-                    <strong>陷阱</strong
-                    >具有陷阱特性的地形牌可以放置到对方场上没有单位的位置生效，在生效后弃置
-                </li>
-                <li>
-                    <strong>中毒</strong>中毒的单位在回合结束受到1点暗影伤害
-                </li>
-                <li>
-                    <strong>星象图</strong
-                    >星象图展示一种场上单位的排列方式，当双方场上单位满足该排列方式时星象图达成
-                </li>
-            </ul>
-        </div>
 
         <div class="container">
             <div class="left-side">
@@ -166,18 +82,17 @@
                         onclick="onclick_zoomout()"
                     />
                     <div id="hint" onclick="onclick_hint()"><u>Hint</u></div>
-                    <div
-                        id="keywords"
-                        onclick="onclick_popup_keywords()"
-                        hidden
-                    >
-                        <u>Keywords</u>
-                    </div>
                     <a
                         href="https://yifeeeeei.github.io/SorceryImages/GameRule.pdf"
                         target="_blank"
                         id="rules"
                         >Rules</a
+                    >
+                    <a
+                        href="https://yifeeeeei.github.io/SorceryImages/update.txt"
+                        target="_blank"
+                        id="updates"
+                        >Updates</a
                     >
                 </div>
                 <div class="lower-part" id="collections">

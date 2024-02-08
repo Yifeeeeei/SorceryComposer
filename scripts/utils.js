@@ -302,12 +302,6 @@ function onclick_shader(event) {
     hide_element(zoom_img);
     hide_element(popup_img);
     hide_element(popup_hint);
-    hide_element(popup_keywords);
-}
-function onclick_popup_keywords(event) {
-    onclick_shader();
-    show_element(shader);
-    show_element(popup_keywords);
 }
 
 function find_deck_for_card(card_info) {

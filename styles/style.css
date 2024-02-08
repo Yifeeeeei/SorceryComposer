@@ -143,11 +143,6 @@ html {
 #button_filter:hover {
     background-color: #f8b9ee;
 }
-#hint {
-    width: 5%;
-    height: 30px;
-    text-align: center;
-}
 
 #zoomin,
 #zoomout {
@@ -285,30 +280,21 @@ html {
 
     object-fit: contain;
 }
-#keywords {
-    width: 5%;
+#hint {
     height: 30px;
     text-align: center;
+    margin-left: 1%;
+}
+#hint:hover {
+    cursor: pointer;
 }
 #rules {
-    width: 5%;
     height: 30px;
     text-align: center;
+    margin-left: 1%;
 }
-
-#popup_keywords {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    max-width: 60%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    max-height: 70%;
-    background-color: #f9dfd7;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #000000;
-    padding: 10px;
-    overflow-y: auto;
+#updates {
+    height: 30px;
+    text-align: center;
+    margin-left: 1%;
 }

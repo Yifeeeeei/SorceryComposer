@@ -60,7 +60,6 @@ async function setup() {
     popup_img = document.getElementById("popup_img");
 
     zoom_img = document.getElementById("zoom_img");
-    popup_keywords = document.getElementById("popup_keywords");
 }
 
 function main() {
