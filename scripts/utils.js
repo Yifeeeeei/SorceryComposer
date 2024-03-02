@@ -154,10 +154,9 @@ function onclick_deck_card_name(event) {
     show_element(shader);
     shader.innerHTML = "";
     let card_src = event.target.getAttribute("img_src");
-    let zoom_img = document.getElementById("zoom_img");
-    zoom_img.className = "zoom";
     zoom_img.src = card_src;
-    // shader.appendChild(zoom_img);
+    show_element(zoom_img);
+    shader.appendChild(zoom_img);
 }
 
 function onclick_deck_minus_button(event) {
