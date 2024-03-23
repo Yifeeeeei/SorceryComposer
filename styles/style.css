@@ -298,3 +298,11 @@ html {
     text-align: center;
     margin-left: 1%;
 }
+#subscribe_link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    text-align: center;
+    margin-left: 1%;
+}
