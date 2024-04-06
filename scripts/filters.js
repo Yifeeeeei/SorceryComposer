@@ -19,7 +19,7 @@ function split_filters() {
     console.log(filters);
     basic_filters = [];
     superior_filters = {};
-    superior_filter_keywords = ["elem", "type", "cost"];
+    superior_filter_keywords = ["elem", "type", "cost", "version"];
     for (let i = 0; i < filters.length; i++) {
         if (
             filters[i].includes(":") &&
@@ -92,6 +92,16 @@ function cost_filter(card_info, superior_filters) {
     return true;
 }
 
+function version_filter(card_info, superior_filters) {
+    if (
+        superior_filters.version == undefined ||
+        card_info.number[3] == superior_filters.version
+    ) {
+        return true;
+    }
+    return false;
+}
+
 function does_card_satisfy_superior_filters(card_info, superior_filters) {
     if (!category_filter(card_info, superior_filters)) {
         return false;
@@ -100,6 +110,9 @@ function does_card_satisfy_superior_filters(card_info, superior_filters) {
         return false;
     }
     if (!cost_filter(card_info, superior_filters)) {
+        return false;
+    }
+    if (!version_filter(card_info, superior_filters)) {
         return false;
     }
     return true;
