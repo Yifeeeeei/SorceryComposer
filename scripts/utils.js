@@ -316,12 +316,27 @@ function find_deck_for_card(card_info) {
     }
 }
 
+function get_card_info_by_number(card_number) {
+    for (let i = 0; i < all_card_infos.length; i++) {
+        if (all_card_infos[i].number == card_number) {
+            return all_card_infos[i];
+        }
+    }
+}
+
 function onclick_add_button(event) {
     const idx = event.target.getAttribute("idx");
     const card_info = displaying_card_infos[idx];
     const deck = find_deck_for_card(card_info);
     current_deck[deck].push(card_info);
     sort_cards_by_number(current_deck[deck]);
+    // add spawns
+    const spawns = card_info.hasOwnProperty("spawns") ? card_info.spawns : [];
+    for (let i = 0; i < spawns.length; i++) {
+        const spawn_info = get_card_info_by_number(spawns[i]);
+        current_deck[find_deck_for_card(spawn_info)].push(spawn_info);
+        sort_cards_by_number(current_deck[find_deck_for_card(spawn_info)]);
+    }
     show_decks();
 }
 
