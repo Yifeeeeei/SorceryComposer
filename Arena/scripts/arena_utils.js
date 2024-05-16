@@ -72,6 +72,10 @@ function arena_create_filter_function_for_main_deck(deck_name, target_element) {
 function arena_prepare_candidates(filter_function) {
     ok_card_infos = [];
     for (let i = 0; i < all_card_infos.length; i++) {
+        // default, it should not be a spawn
+        if (all_card_infos[i].number[2] == "0") {
+            continue;
+        }
         if (filter_function(all_card_infos[i])) {
             ok_card_infos.push(all_card_infos[i]);
         }
