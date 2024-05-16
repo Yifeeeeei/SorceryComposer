@@ -604,7 +604,7 @@ function toggle_deck_info_onclick() {
     }
 }
 
-function refresh_onclick() {
+function onclick_refresh() {
     show_cards();
     show_decks();
     show_deck_info();
