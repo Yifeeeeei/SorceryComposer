@@ -345,6 +345,24 @@ function onclick_add_button(event) {
     // add spawns
     const spawns = card_info.hasOwnProperty("spawns") ? card_info.spawns : [];
     for (let i = 0; i < spawns.length; i++) {
+        let card_already_in_extra_deck = false;
+        for (
+            let j = 0;
+            j < current_deck[find_deck_for_card(card_info)].length;
+            j++
+        ) {
+            if (
+                current_deck[find_deck_for_card(card_info)][j].number ==
+                spawns[i]
+            ) {
+                card_already_in_extra_deck = true;
+                break;
+            }
+        }
+        if (card_already_in_extra_deck) {
+            continue;
+        }
+
         const spawn_info = get_card_info_by_number(spawns[i]);
         current_deck[find_deck_for_card(spawn_info)].push(spawn_info);
         sort_cards_by_number(current_deck[find_deck_for_card(spawn_info)]);
