@@ -150,7 +150,8 @@ html {
 #zoomin,
 #zoomout,
 #refresh,
-#toggle_deck_info {
+#toggle_deck_info,
+#hint {
     height: 30px;
     width: 30px;
     text-align: center;
@@ -160,7 +161,8 @@ html {
 #zoomin:hover,
 #zoomout:hover,
 #refresh:hover,
-#toggle_deck_info:hover {
+#toggle_deck_info:hover,
+#hint:hover {
     border: #ffa9e2 0px solid;
     border-radius: 4px;
     background-color: #f8b9ee;
@@ -288,16 +290,13 @@ html {
 
     object-fit: contain;
 }
-#hint,
+
 #rules,
 #updates,
 #go_to_arena {
     height: 30px;
     text-align: center;
     margin-left: 1%;
-}
-#hint:hover {
-    cursor: pointer;
 }
 
 #subscribe_link {
