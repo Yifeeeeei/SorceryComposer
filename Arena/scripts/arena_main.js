@@ -11,7 +11,7 @@ async function setup() {
     sort_cards_by_number(all_card_infos);
     console.log(all_card_infos.length, "all card infos read");
     // display all cards
-    displaying_card_infos = all_card_infos;
+    displaying_card_infos = [];
     // create a card div for each card
     show_cards();
 
@@ -21,29 +21,6 @@ async function setup() {
     deck_main = document.getElementById("deck_main");
     deck_ability = document.getElementById("deck_ability");
     deck_extra = document.getElementById("deck_extra");
-
-    // change default enter for input filter
-    let input_filt = document.getElementById("input_filter");
-    input_filt.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            // 13 is the key code for Enter
-            console.log("Enter pressed");
-            event.preventDefault(); // Prevent the default action to stop form submission
-            button_filter_clicked(); // Trigger the button's click event
-        }
-    });
-
-    // change default enter for input deck code
-    let input_deck = document.getElementById("input_deck_code");
-    input_deck.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            // 13 is the key code for Enter
-            console.log("Enter pressed");
-            event.preventDefault(); // Prevent the default action to stop form submission
-            onclick_button_build(); // Trigger the button's click event
-        }
-    });
-
     // set up input_deck_code
     input_deck_code = document.getElementById("input_deck_code");
     // set up button_build
@@ -65,10 +42,12 @@ async function setup() {
     show_decks();
     // hide the deckinfo
     hide_element(document.getElementById("deck_info"));
+
+    arena_main_loop();
 }
 
 function main() {
-    console.log("Hello from main.js");
+    console.log("Hello from arena_main.js");
     setup();
 }
 

@@ -30,6 +30,7 @@ function decode(encoded) {
 
 // this function will display all cards in displaying_card_infos onto the page
 function show_cards() {
+    document.getElementById("collections_list").innerHTML = "";
     for (let i = 0; i < displaying_card_infos.length; i++) {
         const card_info = displaying_card_infos[i];
         let card_ele = get_card_element_by_card_info(card_info, i);
@@ -102,6 +103,7 @@ function show_decks() {
         "</strong>";
     document.getElementById("extra_header").innerHTML =
         "<strong>" + "EXTRA " + current_deck["extra"].length + "</strong>";
+    show_deck_info();
 }
 
 function onclick_button_build(event) {
@@ -239,11 +241,21 @@ function get_discription_element_by_card_info(card_info) {
 
 function hide_element(element) {
     element.setAttribute("hidden", "true");
+    if (!element.classList.contains("hidden")) {
+        element.classList.add("hidden");
+    }
     return element;
+
+    // add hidden to class name
 }
 function show_element(element) {
     if (element.hasAttribute("hidden")) {
         element.removeAttribute("hidden");
+    }
+    // return element;
+    // remove hidden from class name
+    if (element.classList.contains("hidden")) {
+        element.classList.remove("hidden");
     }
     return element;
 }
@@ -429,4 +441,171 @@ function onclick_hint() {
     // show_element(popup);
     show_element(popup_hint);
     show_element(shader);
+}
+
+function get_deck_curve(card_infos) {
+    let curve_dict = {};
+    for (let i = curve_min; i <= curve_max; i++) {
+        curve_dict[i] = 0;
+    }
+    for (let i = 0; i < card_infos.length; i++) {
+        let card_info = card_infos[i];
+        let card_cost = 0;
+        for (let i = 0; i < Object.keys(card_info.elements_cost).length; i++) {
+            const key = Object.keys(card_info.elements_cost)[i];
+            card_cost += card_info.elements_cost[key];
+        }
+        if (card_cost > curve_max) {
+            card_cost = curve_max;
+        }
+        curve_dict[card_cost] += 1;
+    }
+    return curve_dict;
+}
+
+function get_deck_component(card_infos) {
+    let component_dict = { 生物: 0, 道具: 0, 装备: 0, 消耗品: 0, 地形: 0 };
+    for (let i = 0; i < card_infos.length; i++) {
+        let card_info = card_infos[i];
+        if (card_info.type === "生物") {
+            component_dict["生物"] += 1;
+        } else {
+            component_dict["道具"] += 1;
+        }
+        if (
+            card_info.tag.includes("卷轴") ||
+            card_info.tag.includes("药剂") ||
+            card_info.tag.includes("符文")
+        ) {
+            component_dict["消耗品"] += 1;
+        }
+        if (
+            card_info.tag.includes("武器") ||
+            card_info.tag.includes("饰物") ||
+            card_info.tag.includes("神器") ||
+            card_info.tag.includes("防具") ||
+            card_info.tag.includes("用具")
+        ) {
+            component_dict["装备"] += 1;
+        }
+        if (card_info.tag.includes("地形")) {
+            component_dict["地形"] += 1;
+        }
+    }
+    return component_dict;
+}
+
+function show_deck_info() {
+    let main_curve = get_deck_curve(current_deck["main"]);
+    main_labels = [];
+    for (let i = curve_min; i < curve_max; i++) {
+        main_labels.push(i.toString());
+    }
+    main_labels.push(curve_max.toString() + "+");
+    let main_data = [];
+    for (let i = curve_min; i <= curve_max; i++) {
+        main_data.push(main_curve[i]);
+    }
+    main_deck_curve_chart_reference = draw_bar_plot(
+        document.getElementById("main_deck_curve_canvas"),
+        main_data,
+        main_labels,
+        main_deck_curve_chart_reference,
+        "MAIN"
+    );
+
+    let ability_curve = get_deck_curve(current_deck["ability"]);
+    let ability_labels = [];
+    for (let i = curve_min; i < curve_max; i++) {
+        ability_labels.push(i.toString());
+    }
+    ability_labels.push(curve_max.toString() + "+");
+    let ability_data = [];
+    for (let i = curve_min; i <= curve_max; i++) {
+        ability_data.push(ability_curve[i]);
+    }
+    ability_deck_curve_chart_reference = draw_bar_plot(
+        document.getElementById("ability_deck_curve_canvas"),
+        ability_data,
+        ability_labels,
+        ability_deck_curve_chart_reference,
+        "ABILITY"
+    );
+
+    let main_component = get_deck_component(current_deck["main"]);
+    let main_component_labels = Object.keys(main_component);
+    let main_component_data = Object.values(main_component);
+    main_deck_components_chart_reference = draw_bar_plot(
+        document.getElementById("main_deck_components_canvas"),
+        main_component_data,
+        main_component_labels,
+        main_deck_components_chart_reference,
+        ""
+    );
+}
+
+function draw_bar_plot(canvas, data, labels, chart_reference, title = "") {
+    // if the canvas has no chart
+    if (chart_reference === null) {
+        let ctx = canvas.getContext("2d");
+        chart_reference = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        data: data,
+                        backgroundColor: "#F17C67",
+                        borderColor: "#F17C67",
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1, // Set the step size to 1 to ensure only integers are shown
+                            callback: function (value) {
+                                if (Number.isInteger(value)) {
+                                    return value; // Only return the tick if it is an integer
+                                }
+                            },
+                        },
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: true, // Show the title
+                        text: title, // Set the title text
+                    },
+                },
+            },
+        });
+    } else {
+        // update the chart
+        chart_reference.data.datasets[0].data = data;
+        chart_reference.labels = labels;
+        chart_reference.update();
+    }
+    return chart_reference;
+}
+
+function toggle_deck_info_onclick() {
+    // if hidden
+    if (deck_info.classList.contains("hidden")) {
+        show_element(deck_info);
+    } else {
+        hide_element(deck_info);
+    }
+}
+
+function refresh_onclick() {
+    show_cards();
+    show_decks();
+    show_deck_info();
 }

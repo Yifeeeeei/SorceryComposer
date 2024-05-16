@@ -3,16 +3,21 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-        <title>SorceryComposer</title>
-        <link rel="stylesheet" href="./styles/style.css" />
+        <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+        <title>Arena</title>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="./scripts/global_vars.js"></script>
-        <script src="./scripts/filters.js"></script>
-        <script src="./scripts/utils.js"></script>
-        <script src="./scripts/main.js"></script>
+
+        <link rel="stylesheet" href="../styles/style.css" />
+        <script src="../scripts/global_vars.js"></script>
+        <script src="../scripts/filters.js"></script>
+        <script src="../scripts/utils.js"></script>
+
+        <link rel="stylesheet" href="./styles/arena_style.css" />
+        <script src="./scripts/arena_global_vars.js"></script>
+        <script src="./scripts/arena_utils.js"></script>
+        <script src="./scripts/arena_main.js"></script>
     </head>
     <body>
         <div id="shader" hidden onclick="onclick_shader()"></div>
@@ -35,14 +40,14 @@
                 <strong>按钮功能</strong>
                 <li>
                     <img
-                        src="./resources/zoomin.svg"
+                        src="../resources/zoomin.svg"
                         alt=""
                         style="width: 25px; height: 25px"
                     />放大卡牌
                 </li>
                 <li>
                     <img
-                        src="./resources/zoomout.svg"
+                        src="../resources/zoomout.svg"
                         alt=""
                         style="width: 25px; height: 25px"
                     />
@@ -50,7 +55,7 @@
                 </li>
                 <li>
                     <img
-                        src="./resources/refresh.svg"
+                        src="../resources/refresh.svg"
                         alt=""
                         style="width: 25px; height: 25px"
                     />
@@ -58,70 +63,20 @@
                 </li>
                 <li>
                     <img
-                        src="./resources/chart.svg"
+                        src="../resources/chart.svg"
                         alt=""
                         style="width: 25px; height: 25px"
                     />
                     卡组曲线构成信息
                 </li>
             </ul>
+
             <ul>
-                <strong>链接</strong>
+                <strong>竞技场规则</strong>
                 <li>
-                    <a
-                        href="https://yifeeeeei.github.io/SorceryImages/GameRule.pdf"
-                        target="_blank"
-                        >Rules</a
-                    >: 查看游戏规则
+                    选择一个英雄，接下来所有卡牌的属性都会与该英雄相同，或者为?属性
                 </li>
-                <li>
-                    <a
-                        href="https://yifeeeeei.github.io/SorceryImages/update.txt"
-                        target="_blank"
-                        >Updates</a
-                    >: 查看更新日志
-                </li>
-                <li>
-                    <a href="./Arena/" target="_blank">ARENA!!!</a>:
-                    进入紧张刺激的<strong>竞技场</strong>!
-                </li>
-            </ul>
-            <ul>
-                <strong>如何使用过滤器</strong>
-                <li>
-                    关键词过滤器：直接输入关键词，过滤留下在名称，标签，描述中包含关键词的卡牌
-                </li>
-                <li>元素过滤器："elem:" + ?/火/水/气/地/光/暗</li>
-                <li>类别过滤取："type:" + 生物/技能/道具/英雄</li>
-                <li>费用过滤器："cost:" + 对应费用</li>
-                <li>版本过滤器："version:" + 扩展包版本号</li>
-                <li>
-                    过滤器组合：用分号";"组合不同的过滤器，过滤器之间为与的关系
-                </li>
-                <li>空白字符会自动被跳过，中英文符号不区分</li>
-            </ul>
-            <ul>
-                <strong>示例</strong>
-                <li>elem:火;type:生物;cost:3;version:0</li>
-                <li>传奇;龙</li>
-                <li>type:技能;风暴之怒</li>
-            </ul>
-            <ul>
-                <strong>构建卡组</strong>
-                <li>点击左侧卡牌旁的+，将其添加到卡组中</li>
-                <li>点击左侧图片，将它放大</li>
-                <li>点击右侧卡牌名称旁的-，将其从卡组中移除</li>
-                <li>鼠标移动至右侧卡牌名称，自动显示完整卡牌</li>
-                <li>使用放大镜按钮放大缩小预览卡牌大小</li>
-            </ul>
-            <ul>
-                <strong>导入和导出</strong>
-                <li>
-                    点击右侧的Export按钮，将当前卡组导出为卡组代码，在右侧输入框中显示并且自动复制到剪贴板
-                </li>
-                <li>
-                    在右侧输入框输入卡组代码，并点击右侧的Build按钮，将卡组代码导入到当前卡组
-                </li>
+                <li>每次从3张卡牌中选择一张添加进你的卡组，直到完成构筑</li>
             </ul>
         </div>
         <!-- </div> -->
@@ -131,29 +86,29 @@
             <div class="left-side">
                 <div class="upper-part">
                     <!-- Content for the upper left side goes here -->
-                    <input type="text" id="input_filter" />
+                    <!-- <input type="text" id="input_filter" />
                     <button
                         id="button_filter"
                         onclick="button_filter_clicked()"
                     >
                         Filt!
-                    </button>
+                    </button> -->
                     <img
-                        src="./resources/zoomin.svg"
+                        src="../resources/zoomin.svg"
                         id="zoomin"
                         alt=""
                         onclick="onclick_zoomin()"
                         title="Zoom In"
                     />
                     <img
-                        src="./resources/zoomout.svg"
+                        src="../resources/zoomout.svg"
                         id="zoomout"
                         alt=""
                         onclick="onclick_zoomout()"
                         title="Zoom Out"
                     />
                     <img
-                        src="./resources/refresh.svg"
+                        src="../resources/refresh.svg"
                         id="refresh"
                         alt=""
                         onclick="onclick_refresh()"
@@ -161,7 +116,7 @@
                     />
                     <img
                         id="toggle_deck_info"
-                        src="./resources/chart.svg"
+                        src="../resources/chart.svg"
                         onclick="toggle_deck_info_onclick()"
                         title="Toggle Deck Info"
                     />
@@ -178,8 +133,8 @@
                         id="updates"
                         >Updates</a
                     >
-                    <a href="./Arena/" target="_blank" id="go_to_arena"
-                        >ARENA!!!</a
+                    <a href="../" target="_blank" id="go_to_standard"
+                        >Back To Standard Mode</a
                     >
                 </div>
                 <div class="lower-part" id="collections">
@@ -201,10 +156,10 @@
             <div class="right-side">
                 <div class="upper-part">
                     <!-- Content for the upper right side goes here -->
-                    <input type="text" id="input_deck_code" />
-                    <button id="button_build" onclick="onclick_button_build()">
+                    <input type="text" id="input_deck_code" readonly />
+                    <!-- <button id="button_build" onclick="onclick_button_build()">
                         Build
-                    </button>
+                    </button> -->
                     <button
                         id="button_export"
                         onclick="onclick_button_export()"

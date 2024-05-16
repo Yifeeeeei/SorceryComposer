@@ -16,3 +16,9 @@ var card_width = "200px";
 var card_height = "330px";
 var zoom_ratio = 1.25;
 var zoom_img;
+
+var curve_min = 0;
+var curve_max = 7;
+var main_deck_curve_chart_reference = null;
+var ability_deck_curve_chart_reference = null;
+var main_deck_components_chart_reference = null;

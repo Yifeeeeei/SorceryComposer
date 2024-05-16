@@ -68,6 +68,9 @@ html {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
+
+    flex: 1;
+    overflow-y: auto;
 }
 
 .card {
@@ -145,15 +148,19 @@ html {
 }
 
 #zoomin,
-#zoomout {
-    /* width: 10%; */
+#zoomout,
+#refresh,
+#toggle_deck_info {
     height: 30px;
+    width: 30px;
     text-align: center;
     margin-bottom: 1%;
     margin-left: 1%;
 }
 #zoomin:hover,
-#zoomout:hover {
+#zoomout:hover,
+#refresh:hover,
+#toggle_deck_info:hover {
     border: #ffa9e2 0px solid;
     border-radius: 4px;
     background-color: #f8b9ee;
@@ -277,10 +284,14 @@ html {
     width: 30%;
     height: auto;
     transform: translate(-50%, -50%);
+    z-index: 2;
 
     object-fit: contain;
 }
-#hint {
+#hint,
+#rules,
+#updates,
+#go_to_arena {
     height: 30px;
     text-align: center;
     margin-left: 1%;
@@ -288,16 +299,7 @@ html {
 #hint:hover {
     cursor: pointer;
 }
-#rules {
-    height: 30px;
-    text-align: center;
-    margin-left: 1%;
-}
-#updates {
-    height: 30px;
-    text-align: center;
-    margin-left: 1%;
-}
+
 #subscribe_link {
     display: flex;
     justify-content: center;
@@ -305,4 +307,69 @@ html {
     height: 30px;
     text-align: center;
     margin-left: 1%;
+}
+
+/* bottom plots */
+/* bottom */
+.lower-part {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#collections {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure collections takes the full height of its parent */
+}
+
+#deck_info {
+    height: 25%;
+    overflow-y: auto;
+    margin-top: auto;
+    position: fixed;
+    width: 85%;
+    bottom: 0%;
+    background-color: #eeede7e8;
+    display: flex;
+    box-sizing: border-box;
+}
+#main_deck_curve,
+#main_deck_components,
+#ability_deck_curve {
+    display: flex; /* Use flexbox layout */
+    justify-content: center; /* Center horizontally */
+    align-items: flex-end; /* Align to the bottom */
+    height: 100%; /* Ensure each component takes the full height */
+    width: 30%; /* Set the width of each component */
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+#main_deck_curve {
+    flex: 0 0 33%;
+}
+
+#main_deck_components {
+    flex: 0 0 33%;
+}
+
+#ability_deck_curve {
+    flex: 0 0 33%;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+}
+
+.hidden {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
 }
