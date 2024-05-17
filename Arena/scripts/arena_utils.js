@@ -20,7 +20,7 @@ async function arena_main_loop() {
     // choose ability deck
     for (let i = 0; i < 12; i++) {
         arena_prepare_candidates(
-            arena_create_filter_function_for_main_deck(
+            arena_create_filter_function_for_ability_deck(
                 "ability",
                 arena_chosen_element
             )
@@ -60,11 +60,41 @@ function arena_filter_deck_on_element(deck_name, target_element, card_info) {
 
 function arena_create_filter_function_for_main_deck(deck_name, target_element) {
     return function (card_info) {
-        return arena_filter_deck_on_element(
+        // no spawn cards
+        if (card_info.number[2] == "0") {
+            return false;
+        }
+        let element_result = arena_filter_deck_on_element(
             deck_name,
             target_element,
             card_info
         );
+        return element_result;
+    };
+}
+function arena_create_filter_function_for_ability_deck(
+    deck_name,
+    target_element
+) {
+    return function (card_info) {
+        if (card_info.number[2] == "0") {
+            return false;
+        }
+        let element_result = arena_filter_deck_on_element(
+            deck_name,
+            target_element,
+            card_info
+        );
+        if (!element_result) {
+            return false;
+        }
+        // no duplicate cards in current ability deck
+        for (let i = 0; i < current_deck["ability"].length; i++) {
+            if (current_deck["ability"][i].number == card_info.number) {
+                return false;
+            }
+        }
+        return true;
     };
 }
 
@@ -72,10 +102,6 @@ function arena_create_filter_function_for_main_deck(deck_name, target_element) {
 function arena_prepare_candidates(filter_function) {
     ok_card_infos = [];
     for (let i = 0; i < all_card_infos.length; i++) {
-        // default, it should not be a spawn
-        if (all_card_infos[i].number[2] == "0") {
-            continue;
-        }
         if (filter_function(all_card_infos[i])) {
             ok_card_infos.push(all_card_infos[i]);
         }

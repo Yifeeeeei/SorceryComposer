@@ -22,3 +22,5 @@ var curve_max = 7;
 var main_deck_curve_chart_reference = null;
 var ability_deck_curve_chart_reference = null;
 var main_deck_components_chart_reference = null;
+
+var update_card_numbers = [];

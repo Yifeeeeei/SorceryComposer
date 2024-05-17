@@ -14,6 +14,22 @@ async function setup() {
     displaying_card_infos = all_card_infos;
     // create a card div for each card
     show_cards();
+    // read the update cards
+    update_card_numbers = await readJsonFile(
+        "https://yifeeeeei.github.io/SorceryImages/update.json"
+    );
+    if (update_card_numbers == null) {
+        update_card_numbers = [];
+    } else {
+        // for all elements, if it is an int, convert it to a string
+        for (let i = 0; i < update_card_numbers.length; i++) {
+            if (typeof update_card_numbers[i] == "number") {
+                update_card_numbers[i] = update_card_numbers[i].toString();
+            }
+        }
+        // sort the update card numbers
+        update_card_numbers.sort();
+    }
 
     // set shader
     shader = document.getElementById("shader");

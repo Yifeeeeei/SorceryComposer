@@ -20,6 +20,8 @@ function split_filters() {
     basic_filters = [];
     superior_filters = {};
     superior_filter_keywords = ["elem", "type", "cost", "version"];
+    keyword_filter_keywords = ["update"];
+    keyword_filters = [];
     for (let i = 0; i < filters.length; i++) {
         if (
             filters[i].includes(":") &&
@@ -31,12 +33,14 @@ function split_filters() {
             if (superior_filters[key] == undefined) {
                 superior_filters[key] = value;
             }
+        } else if (keyword_filter_keywords.includes(filters[i])) {
+            keyword_filters.push(filters[i]);
         } else {
             // this is a basic filter
             basic_filters.push(filters[i]);
         }
     }
-    return [basic_filters, superior_filters];
+    return [basic_filters, keyword_filters, superior_filters];
 }
 
 function get_card_features(card_info) {
@@ -118,12 +122,29 @@ function does_card_satisfy_superior_filters(card_info, superior_filters) {
     return true;
 }
 
+function keyword_update_filter(card_info, keyword_filters) {
+    if (keyword_filters.includes("update")) {
+        if (!update_card_numbers.includes(card_info.number)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function does_card_satisfy_keyword_filters(card_info, keyword_filters) {
+    if (!keyword_update_filter(card_info, keyword_filters)) {
+        return false;
+    }
+    return true;
+}
+
 function filter_all() {
     // get the input value
     input_filter = document.getElementById("input_filter").value;
     const splited = split_filters();
     const basic_filters = splited[0];
-    const superior_filters = splited[1];
+    const keyword_filters = splited[1];
+    const superior_filters = splited[2];
     displaying_card_infos = [];
 
     for (let i = 0; i < all_card_infos.length; i++) {
@@ -134,6 +155,15 @@ function filter_all() {
             !does_card_satisfy_superior_filters(
                 all_card_infos[i],
                 superior_filters
+            )
+        ) {
+            failed = true;
+            continue;
+        }
+        if (
+            !does_card_satisfy_keyword_filters(
+                all_card_infos[i],
+                keyword_filters
             )
         ) {
             failed = true;

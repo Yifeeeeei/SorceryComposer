@@ -178,12 +178,14 @@ async function readJsonFile(jsonPath) {
     try {
         const response = await fetch(jsonPath);
         if (!response.ok) {
-            throw new Error("Network response was not ok");
+            // throw new Error("Network response was not ok");
+            return null;
         }
         const data = await response.json();
         return data;
     } catch (error) {
         console.error("Error reading the JSON file:", error);
+        return null;
     }
 }
 
