@@ -12,7 +12,8 @@ async function arena_main_loop() {
             arena_create_filter_function_for_main_deck(
                 "main",
                 arena_chosen_element
-            )
+            ),
+            arena_weight_function_for_main_deck
         );
         await arena_wait_till_card_added();
         arena_card_info_added = null;
@@ -43,78 +44,63 @@ async function arena_wait_till_card_added(interval = 100) {
     }
 }
 
-// filter function for arena
-function arena_filter_hero(card_info) {
-    return card_info.type === "英雄";
-}
-
-function arena_filter_deck_on_element(deck_name, target_element, card_info) {
-    if (
-        find_deck_for_card(card_info) == deck_name &&
-        (card_info.category == target_element || card_info.category == "?")
-    ) {
-        return true;
-    }
-    return false;
-}
-
-function arena_create_filter_function_for_main_deck(deck_name, target_element) {
-    return function (card_info) {
-        // no spawn cards
-        if (card_info.number[2] == "0") {
-            return false;
-        }
-        let element_result = arena_filter_deck_on_element(
-            deck_name,
-            target_element,
-            card_info
-        );
-        return element_result;
-    };
-}
-function arena_create_filter_function_for_ability_deck(
-    deck_name,
-    target_element
-) {
-    return function (card_info) {
-        if (card_info.number[2] == "0") {
-            return false;
-        }
-        let element_result = arena_filter_deck_on_element(
-            deck_name,
-            target_element,
-            card_info
-        );
-        if (!element_result) {
-            return false;
-        }
-        // no duplicate cards in current ability deck
-        for (let i = 0; i < current_deck["ability"].length; i++) {
-            if (current_deck["ability"][i].number == card_info.number) {
-                return false;
-            }
-        }
-        return true;
-    };
-}
-
 // this function choose the corresponding cards and displays them
-function arena_prepare_candidates(filter_function) {
+function arena_prepare_candidates(filter_function, weight_function = null) {
     ok_card_infos = [];
     for (let i = 0; i < all_card_infos.length; i++) {
         if (filter_function(all_card_infos[i])) {
             ok_card_infos.push(all_card_infos[i]);
         }
     }
-
-    // randomly choose some cards with no duplication
-    displaying_card_infos = [];
-    for (let i = 0; i < arena_candidate_number; i++) {
-        let idx = Math.floor(Math.random() * ok_card_infos.length);
-        displaying_card_infos.push(ok_card_infos[idx]);
-        ok_card_infos.splice(idx, 1);
+    weights = [];
+    for (let i = 0; i < ok_card_infos.length; i++) {
+        if (weight_function === null) {
+            console.log("weight function is null");
+            weights.push(1);
+        } else {
+            weights.push(weight_function(ok_card_infos[i]));
+        }
     }
+
+    // randomly choose some cards with no duplication according to the weight
+    chosen_indexes = arena_choose_cards_by_weight(
+        weights,
+        arena_candidate_number
+    );
+
+    displaying_card_infos = [];
+    for (let i = 0; i < chosen_indexes.length; i++) {
+        displaying_card_infos.push(ok_card_infos[chosen_indexes[i]]);
+    }
+
     show_cards();
+}
+function arena_choose_cards_by_weight(weights, number) {
+    let chosen_indexes = [];
+    let indexes = weights.map((_, index) => index);
+    let total_weight = weights.reduce((acc, weight) => acc + weight, 0);
+
+    for (let i = 0; i < number; i++) {
+        let random_number = Math.random() * total_weight;
+        let sum = 0;
+
+        for (let j = 0; j < weights.length; j++) {
+            sum += weights[j];
+
+            if (random_number < sum) {
+                chosen_indexes.push(indexes[j]);
+                total_weight -= weights[j];
+
+                // Remove the selected index and its weight
+                weights.splice(j, 1);
+                indexes.splice(j, 1);
+
+                break;
+            }
+        }
+    }
+
+    return chosen_indexes;
 }
 
 // for arena onclick, rewirte the add button function
