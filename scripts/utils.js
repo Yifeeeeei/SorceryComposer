@@ -348,17 +348,12 @@ function onclick_add_button(event) {
     const spawns = card_info.hasOwnProperty("spawns") ? card_info.spawns : [];
     for (let i = 0; i < spawns.length; i++) {
         // parse it to int then to string
-        spawn_number = parseInt(spawns[i]).toString();
+        let spawn_number = parseInt(spawns[i]).toString();
+        const spawn_info = get_card_info_by_number(spawn_number);
+        const spawn_deck = find_deck_for_card(spawn_info);
         let card_already_in_extra_deck = false;
-        for (
-            let j = 0;
-            j < current_deck[find_deck_for_card(card_info)].length;
-            j++
-        ) {
-            if (
-                current_deck[find_deck_for_card(card_info)][j].number ==
-                spawn_number
-            ) {
+        for (let j = 0; j < current_deck[spawn_deck].length; j++) {
+            if (current_deck[spawn_deck][j].number == spawn_number) {
                 card_already_in_extra_deck = true;
                 break;
             }
@@ -366,10 +361,8 @@ function onclick_add_button(event) {
         if (card_already_in_extra_deck) {
             continue;
         }
-
-        const spawn_info = get_card_info_by_number(spawn_number);
-        current_deck[find_deck_for_card(spawn_info)].push(spawn_info);
-        sort_cards_by_number(current_deck[find_deck_for_card(spawn_info)]);
+        current_deck[spawn_deck].push(spawn_info);
+        sort_cards_by_number(current_deck[spawn_deck]);
     }
     show_decks();
 }
