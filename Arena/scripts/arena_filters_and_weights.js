@@ -4,12 +4,26 @@ function arena_weight_function_for_main_deck(card_info) {
     if (is_legend(card_info)) {
         w = w * 0.4;
     }
+    if (card_info.category == "?") {
+        w = w * 0.3;
+    }
+    return w;
+}
+
+function arena_weight_function_for_ability_deck(card_info) {
+    let w = 1;
+    if (is_legend(card_info)) {
+        w = w * 0.4;
+    }
+    if (card_info.category == "?") {
+        w = w * 0.3;
+    }
     return w;
 }
 
 // filter function for arena
 function arena_filter_hero(card_info) {
-    return card_info.type === "英雄";
+    return card_info.type === "英雄" && card_info.category != "?";
 }
 
 function arena_filter_deck_on_element(deck_name, target_element, card_info) {

@@ -6,28 +6,30 @@ async function arena_main_loop() {
     arena_chosen_element = arena_card_info_added.category;
     // choose main deck
     arena_card_info_added = null;
-
-    for (let i = 0; i < 30; i++) {
-        arena_prepare_candidates(
-            arena_create_filter_function_for_main_deck(
-                "main",
-                arena_chosen_element
-            ),
-            arena_weight_function_for_main_deck
-        );
-        await arena_wait_till_card_added();
-        arena_card_info_added = null;
-    }
-    // choose ability deck
-    for (let i = 0; i < 12; i++) {
-        arena_prepare_candidates(
-            arena_create_filter_function_for_ability_deck(
-                "ability",
-                arena_chosen_element
-            )
-        );
-        await arena_wait_till_card_added();
-        arena_card_info_added = null;
+    for (let j = 0; j < 3; j++) {
+        for (let i = 0; i < 10; i++) {
+            arena_prepare_candidates(
+                arena_create_filter_function_for_main_deck(
+                    "main",
+                    arena_chosen_element
+                ),
+                arena_weight_function_for_main_deck
+            );
+            await arena_wait_till_card_added();
+            arena_card_info_added = null;
+        }
+        // choose ability deck
+        for (let i = 0; i < 4; i++) {
+            arena_prepare_candidates(
+                arena_create_filter_function_for_ability_deck(
+                    "ability",
+                    arena_chosen_element
+                ),
+                arena_weight_function_for_ability_deck
+            );
+            await arena_wait_till_card_added();
+            arena_card_info_added = null;
+        }
     }
     console.log("Arena main loop finished");
     // click the export button
