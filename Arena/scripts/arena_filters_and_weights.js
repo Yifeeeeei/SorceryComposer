@@ -4,9 +4,6 @@ function arena_weight_function_for_main_deck(card_info) {
     if (is_legend(card_info)) {
         w = w * 0.4;
     }
-    if (card_info.description.includes("过载")) {
-        w = w * 0.3;
-    }
     return w;
 }
 
