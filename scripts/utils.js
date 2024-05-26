@@ -333,7 +333,8 @@ function set_zoom_text(card_info) {
     let zoom_name_str = card_info.name;
     let zoom_category_str = card_info.category;
     let zoom_tag_str = card_info.tag;
-    html_template += `<li><strong>${zoom_name_str}</strong> ${zoom_number_str} ${zoom_type_str} ${zoom_category_str} ${zoom_tag_str}</li>`;
+    html_template += `<li><strong>${zoom_name_str}</strong></li>`;
+    html_template += `<li>${zoom_number_str} ${zoom_type_str} ${zoom_category_str} ${zoom_tag_str}</li>`;
 
     let zoom_cost_str = get_zoom_elements_str(
         card_info.category,

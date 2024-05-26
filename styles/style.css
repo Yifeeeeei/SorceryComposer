@@ -215,7 +215,7 @@ html {
     z-index: 2;
     width: auto;
     max-width: 45%;
-    height: 90%;
+    height: auto;
     object-fit: contain;
     color: #ffffff;
     font-size: 22px;
