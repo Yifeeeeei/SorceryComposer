@@ -37,6 +37,8 @@ async function setup() {
     popup_img = document.getElementById("popup_img");
 
     zoom_img = document.getElementById("zoom_img");
+    zoom_info = document.getElementById("zoom_info");
+    zoom_text = document.getElementById("zoom_text");
 
     // show deck to init bar plot
     show_decks();

@@ -157,8 +157,12 @@ function onclick_deck_card_name(event) {
     shader.innerHTML = "";
     let card_src = event.target.getAttribute("img_src");
     zoom_img.src = card_src;
+    set_zoom_text(
+        get_card_info_by_number(event.target.getAttribute("card_number"))
+    );
+    show_element(zoom_info);
     show_element(zoom_img);
-    shader.appendChild(zoom_img);
+    show_element(zoom_text);
 }
 
 function onclick_deck_minus_button(event) {
@@ -300,19 +304,103 @@ function get_img_element_by_card_info(card_info) {
     return img_element;
 }
 
+function get_zoom_elements_str(card_category, card_elements) {
+    let eles = [];
+    let nums = [];
+    eles.push(card_category);
+    nums.push(0);
+    for (let i = 0; i < Object.keys(card_elements).length; i++) {
+        if (Object.keys(card_elements)[i] == card_category) {
+            nums[0] = card_elements[card_category];
+        } else {
+            eles.push(Object.keys(card_elements)[i]);
+            nums.push(card_elements[Object.keys(card_elements)[i]]);
+        }
+    }
+    let rt_str = "";
+    for (let i = 0; i < eles.length; i++) {
+        if (nums[i] > 0) {
+            rt_str += nums[i] + " " + eles[i] + " ";
+        }
+    }
+    return rt_str;
+}
+
+function set_zoom_text(card_info) {
+    let html_template = ``;
+    let zoom_number_str = card_info.number.toString();
+    let zoom_type_str = card_info.type;
+    let zoom_name_str = card_info.name;
+    let zoom_category_str = card_info.category;
+    let zoom_tag_str = card_info.tag;
+    html_template += `<li><strong>${zoom_name_str}</strong> ${zoom_number_str} ${zoom_type_str} ${zoom_category_str} ${zoom_tag_str}</li>`;
+
+    let zoom_cost_str = get_zoom_elements_str(
+        card_info.category,
+        card_info.elements_cost
+    );
+    html_template += `<li><strong>条件:</strong> ${zoom_cost_str}</li>`;
+    let zoom_expense_str = get_zoom_elements_str(
+        card_info.category,
+        card_info.elements_expense
+    );
+    if (zoom_expense_str != "") {
+        html_template += `<li><strong>代价:</strong> ${zoom_expense_str}</li>`;
+    }
+    let zoom_gain_str = get_zoom_elements_str(
+        card_info.category,
+        card_info.elements_gain
+    );
+    if (zoom_gain_str != "") {
+        html_template += `<li><strong>负载:</strong> ${zoom_gain_str}</li>`;
+    }
+
+    if (card_info.life > 0) {
+        html_template += `<li><strong>生命:</strong> ${card_info.life.toString()}</li>`;
+    }
+    if (card_info.attack > 0) {
+        html_template += `<li><strong>攻击:</strong> ${card_info.attack.toString()}</li>`;
+    }
+    if (card_info.power > 0) {
+        html_template += `<li><strong>威力:</strong> ${card_info.power.toString()}</li>`;
+    }
+    if (card_info.duration > 0) {
+        html_template += `<li><strong>持续:</strong> ${card_info.duration.toString()}</li>`;
+    }
+    if (card_info.description != "") {
+        html_template += `<li><strong>效果:</strong> ${card_info.description}</li>`;
+    }
+    if (card_info.spawns.length > 0) {
+        html_template += `<li><strong>生成:</strong> ${card_info.spawns.join(
+            " "
+        )}</li>`;
+    }
+    if (card_info.quote != "") {
+        html_template += `<li><i> ${card_info.quote}</i></li>`;
+    }
+    html_template = "<ul>" + html_template + "</ul>";
+    zoom_text.innerHTML = html_template;
+}
+
 function onclick_img_element(event) {
     // clear shader's children
     show_element(shader);
     shader.innerHTML = "";
     let card_src = event.target.src;
     zoom_img.src = card_src;
+    set_zoom_text(
+        get_card_info_by_number(event.target.getAttribute("card_number"))
+    );
+    show_element(zoom_info);
     show_element(zoom_img);
-    shader.appendChild(zoom_img);
+    show_element(zoom_text);
 }
 
 function onclick_shader(event) {
     hide_element(shader);
     hide_element(zoom_img);
+    hide_element(zoom_info);
+    hide_element(zoom_text);
     hide_element(popup_img);
     hide_element(popup_hint);
 }

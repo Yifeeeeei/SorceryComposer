@@ -16,6 +16,8 @@ var card_width = "200px";
 var card_height = "330px";
 var zoom_ratio = 1.25;
 var zoom_img;
+var zoom_info;
+var zoom_text;
 
 var curve_min = 0;
 var curve_max = 7;
