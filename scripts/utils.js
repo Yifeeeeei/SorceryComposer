@@ -372,10 +372,14 @@ function set_zoom_text(card_info) {
         html_template += `<li><strong>效果:</strong> ${card_info.description}</li>`;
     }
     if (card_info.spawns.length > 0) {
-        html_template += `<li><strong>生成:</strong> ${card_info.spawns.join(
+        html_template += `<li><strong>衍生:</strong> ${card_info.spawns.join(
             " "
         )}</li>`;
     }
+    if (card_info.version != "") {
+        html_template += `<li><strong>版本:</strong> ${card_info.version}</li>`;
+    }
+
     if (card_info.quote != "") {
         html_template += `<li><i> ${card_info.quote}</i></li>`;
     }
