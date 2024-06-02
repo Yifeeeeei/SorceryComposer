@@ -271,27 +271,7 @@ function get_dummy_img_src(card_info) {
 }
 
 function get_image_src(card_info) {
-    dic = {
-        "?": "无",
-        火: "火",
-        水: "水",
-        气: "气",
-        地: "地",
-        光: "光",
-        暗: "暗",
-    };
-
-    return (
-        "https://yifeeeeei.github.io/SorceryImages/images/" +
-        card_info.type +
-        "/" +
-        dic[card_info.category] +
-        "/" +
-        card_info.number +
-        "_" +
-        card_info.name +
-        ".jpg"
-    );
+    return "https://yifeeeeei.github.io/SorceryImages/" + card_info.output_path;
 }
 
 function get_img_element_by_card_info(card_info) {
@@ -376,8 +356,8 @@ function set_zoom_text(card_info) {
             " "
         )}</li>`;
     }
-    if (card_info.version != "") {
-        html_template += `<li><strong>版本:</strong> ${card_info.version}</li>`;
+    if (card_info.version_name != "") {
+        html_template += `<li><strong>版本:</strong> ${card_info.version_name}</li>`;
     }
 
     if (card_info.quote != "") {
