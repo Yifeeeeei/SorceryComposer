@@ -83,6 +83,8 @@ async function setup() {
     show_decks();
     // hide the deckinfo
     hide_element(document.getElementById("deck_info"));
+    // focus on the filter input
+    input_filt.focus();
 }
 
 function main() {
