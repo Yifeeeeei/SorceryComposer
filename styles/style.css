@@ -393,3 +393,10 @@ canvas {
     height: 0;
     overflow: hidden;
 }
+
+/* placeholders */
+.inline_image {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle; /* Adjusts the vertical alignment to match the text */
+}

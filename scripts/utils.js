@@ -241,7 +241,8 @@ function get_discription_element_by_card_info(card_info) {
     }
     const description_div = document.createElement("div");
     description_div.className = "card_description";
-    description_div.innerHTML = card_info.description;
+    description = card_info.description;
+    description_div.innerHTML = description;
     return description_div;
 }
 
@@ -303,6 +304,15 @@ function get_zoom_elements_str(card_category, card_elements) {
             rt_str += nums[i] + " " + eles[i] + " ";
         }
     }
+    // replace place holders with inline images
+    // first, replace ? with 无 to avoid error in regex
+    rt_str = rt_str.replace("?", "无");
+    for (const placeholder in element_placeholders) {
+        rt_str = rt_str.replace(
+            new RegExp(placeholder, "g"),
+            `<img src="${element_placeholders[placeholder]}" class="inline_image">`
+        );
+    }
     return rt_str;
 }
 
@@ -349,7 +359,16 @@ function set_zoom_text(card_info) {
         html_template += `<li><strong>持续:</strong> ${card_info.duration.toString()}</li>`;
     }
     if (card_info.description != "") {
-        html_template += `<li><strong>效果:</strong> ${card_info.description}</li>`;
+        // replace place holders with inline images
+        description = card_info.description;
+        for (const placeholder in description_placeholders) {
+            description = description.replace(
+                new RegExp(placeholder, "g"),
+                `<img src="${description_placeholders[placeholder]}" class="inline_image">`
+            );
+        }
+
+        html_template += `<li><strong>效果:</strong> ${description}</li>`;
     }
     if (card_info.spawns.length > 0) {
         html_template += `<li><strong>衍生:</strong> ${card_info.spawns.join(
