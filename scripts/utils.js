@@ -227,8 +227,17 @@ function is_legend(card_info) {
 function get_information_bar_by_card_info(card_info) {
     const information_div = document.createElement("div");
     information_div.className = "card_information_bar";
+    category = card_info.category;
+    category = category.replace("?", "无");
+    for (const placeholder in element_placeholders) {
+        category = category.replace(
+            placeholder,
+            `<img src="${element_placeholders[placeholder]}" class="card_information_bar_inline_image inline_image">`
+        );
+    }
+
     information_div.innerHTML =
-        card_info.type + " " + card_info.category + " " + card_info.tag;
+        card_info.type + " " + category + " " + card_info.tag;
     if (is_legend(card_info)) {
         information_div.innerHTML += " ✡";
     }
@@ -305,12 +314,11 @@ function get_zoom_elements_str(card_category, card_elements) {
         }
     }
     // replace place holders with inline images
-    // first, replace ? with 无 to avoid error in regex
     rt_str = rt_str.replace("?", "无");
     for (const placeholder in element_placeholders) {
         rt_str = rt_str.replace(
-            new RegExp(placeholder, "g"),
-            `<img src="${element_placeholders[placeholder]}" class="inline_image">`
+            placeholder,
+            `<img src="${element_placeholders[placeholder]}" class="zoom_text_inline_image inline_image">`
         );
     }
     return rt_str;
@@ -324,6 +332,17 @@ function set_zoom_text(card_info) {
     let zoom_category_str = card_info.category;
     let zoom_tag_str = card_info.tag;
     html_template += `<li><strong>${zoom_name_str}</strong></li>`;
+
+    // replace ? with 无 to in category str
+    zoom_category_str = zoom_category_str.replace("?", "无");
+    // use inline images for elements
+    for (const placeholder in element_placeholders) {
+        zoom_category_str = zoom_category_str.replace(
+            placeholder,
+            `<img src="${element_placeholders[placeholder]}" class="zoom_text_inline_image inline_image">`
+        );
+    }
+
     html_template += `<li>${zoom_number_str} ${zoom_type_str} ${zoom_category_str} ${zoom_tag_str}</li>`;
 
     let zoom_cost_str = get_zoom_elements_str(
@@ -361,10 +380,11 @@ function set_zoom_text(card_info) {
     if (card_info.description != "") {
         // replace place holders with inline images
         description = card_info.description;
+
         for (const placeholder in description_placeholders) {
             description = description.replace(
-                new RegExp(placeholder, "g"),
-                `<img src="${description_placeholders[placeholder]}" class="inline_image">`
+                placeholder,
+                `<img src="${description_placeholders[placeholder]}" class="zoom_text_inline_image inline_image">`
             );
         }
 

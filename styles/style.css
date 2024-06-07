@@ -396,7 +396,13 @@ canvas {
 
 /* placeholders */
 .inline_image {
+    vertical-align: middle; /* Adjusts the vertical alignment to match the text */
+}
+.zoom_text_inline_image {
     width: 20px;
     height: 20px;
-    vertical-align: middle; /* Adjusts the vertical alignment to match the text */
+}
+.card_information_bar_inline_image {
+    width: 15px;
+    height: 15px;
 }
