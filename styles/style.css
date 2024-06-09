@@ -185,7 +185,7 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.85);
     /* background-color: rgba(226, 215, 202, 0.95); */
     z-index: 1;
 }
@@ -220,7 +220,7 @@ html {
     object-fit: contain;
     color: #ffffff;
     /* color: #000000; */
-    font-size: 22px;
+    font-size: 28px;
     overflow-y: auto;
 }
 .deck_header {
@@ -401,8 +401,8 @@ canvas {
     vertical-align: middle; /* Adjusts the vertical alignment to match the text */
 }
 .zoom_text_inline_image {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
 }
 .card_information_bar_inline_image {
     width: 15px;

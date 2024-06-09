@@ -99,7 +99,7 @@ function cost_filter(card_info, superior_filters) {
 function version_filter(card_info, superior_filters) {
     if (
         superior_filters.version == undefined ||
-        card_info.number[3] == superior_filters.version
+        card_info.version_name == superior_filters.version
     ) {
         return true;
     }
