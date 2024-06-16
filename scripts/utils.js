@@ -228,9 +228,9 @@ function get_information_bar_by_card_info(card_info) {
     const information_div = document.createElement("div");
     information_div.className = "card_information_bar";
     category = card_info.category;
-    category = category.replace("?", "无");
+    category = category.replaceAll("?", "无");
     for (const placeholder in element_placeholders) {
-        category = category.replace(
+        category = category.replaceAll(
             placeholder,
             `<img src="${element_placeholders[placeholder]}" class="card_information_bar_inline_image inline_image">`
         );
@@ -314,9 +314,9 @@ function get_zoom_elements_str(card_category, card_elements) {
         }
     }
     // replace place holders with inline images
-    rt_str = rt_str.replace("?", "无");
+    rt_str = rt_str.replaceAll("?", "无");
     for (const placeholder in element_placeholders) {
-        rt_str = rt_str.replace(
+        rt_str = rt_str.replaceAll(
             placeholder,
             `<img src="${element_placeholders[placeholder]}" class="zoom_text_inline_image inline_image">`
         );
@@ -334,10 +334,10 @@ function set_zoom_text(card_info) {
     html_template += `<li><strong>${zoom_name_str}</strong></li>`;
 
     // replace ? with 无 to in category str
-    zoom_category_str = zoom_category_str.replace("?", "无");
+    zoom_category_str = zoom_category_str.replaceAll("?", "无");
     // use inline images for elements
     for (const placeholder in element_placeholders) {
-        zoom_category_str = zoom_category_str.replace(
+        zoom_category_str = zoom_category_str.replaceAll(
             placeholder,
             `<img src="${element_placeholders[placeholder]}" class="zoom_text_inline_image inline_image">`
         );
@@ -382,7 +382,7 @@ function set_zoom_text(card_info) {
         description = card_info.description;
 
         for (const placeholder in description_placeholders) {
-            description = description.replace(
+            description = description.replaceAll(
                 placeholder,
                 `<img src="${description_placeholders[placeholder]}" class="zoom_text_inline_image inline_image">`
             );
