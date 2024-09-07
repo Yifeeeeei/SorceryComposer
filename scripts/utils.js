@@ -99,7 +99,7 @@ function show_decks() {
         "<strong>" +
         "ABILITY " +
         current_deck["ability"].length +
-        "/12" +
+        "/10" +
         "</strong>";
     document.getElementById("extra_header").innerHTML =
         "<strong>" + "EXTRA " + current_deck["extra"].length + "</strong>";

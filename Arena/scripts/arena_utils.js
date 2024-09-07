@@ -6,8 +6,8 @@ async function arena_main_loop() {
     arena_chosen_element = arena_card_info_added.category;
     // choose main deck
     arena_card_info_added = null;
-    for (let j = 0; j < 3; j++) {
-        for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 2; j++) {
+        for (let i = 0; i < 15; i++) {
             arena_prepare_candidates(
                 arena_create_filter_function_for_main_deck(
                     "main",
@@ -19,7 +19,7 @@ async function arena_main_loop() {
             arena_card_info_added = null;
         }
         // choose ability deck
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 5; i++) {
             arena_prepare_candidates(
                 arena_create_filter_function_for_ability_deck(
                     "ability",
@@ -198,7 +198,7 @@ function show_decks() {
         "<strong>" +
         "ABILITY " +
         current_deck["ability"].length +
-        "/12" +
+        "/10" +
         "</strong>";
     document.getElementById("extra_header").innerHTML =
         "<strong>" + "EXTRA " + current_deck["extra"].length + "</strong>";
