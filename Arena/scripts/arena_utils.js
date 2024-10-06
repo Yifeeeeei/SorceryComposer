@@ -190,17 +190,17 @@ function show_decks() {
     }
     document.getElementById("main_header").innerHTML =
         "<strong>" +
-        "MAIN " +
+        "主要卡组 " +
         current_deck["main"].length +
         "/30" +
         "</strong>";
     document.getElementById("ability_header").innerHTML =
         "<strong>" +
-        "ABILITY " +
+        "技能卡组 " +
         current_deck["ability"].length +
         "/10" +
         "</strong>";
     document.getElementById("extra_header").innerHTML =
-        "<strong>" + "EXTRA " + current_deck["extra"].length + "</strong>";
+        "<strong>" + "额外卡组 " + current_deck["extra"].length + "</strong>";
     show_deck_info();
 }

@@ -28,10 +28,11 @@ html {
 /* Upper and lower parts of the left side */
 .left-side .upper-part {
     height: 10%;
-    background-color: #f9ebed;
+    background-color: #f5f5f5;
     padding: 10px;
     display: flex;
     align-items: center;
+    border-bottom: #bcbcbc 1px solid;
 }
 
 .upper-part input {
@@ -41,20 +42,21 @@ html {
 /* Upper and lower parts of the right side */
 .right-side .upper-part {
     height: 10%;
-    background-color: #fae8e9;
+    background-color: #ececec;
     padding: 10px;
+    border-bottom: #bcbcbc 1px solid;
 }
 
 .right-side .lower-part {
     height: 90%;
-    background-color: #f6e5d6;
+    background-color: #ececec;
     padding: 10px;
     overflow-y: auto;
 }
 
 .left-side .lower-part {
     height: 90%;
-    background-color: #f9eedd;
+    background-color: #f5f5f5;
     padding: 10px;
     overflow-y: auto;
 }
@@ -85,7 +87,7 @@ html {
     height: 330px; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* overflow-y: auto; */
-    background-color: antiquewhite;
+    background-color: rgb(240, 238, 237);
 }
 
 .card_img {
@@ -100,19 +102,19 @@ html {
     border-color: #ffffff;
 }
 .ele_water {
-    border-color: #5ed7ff;
+    border-color: #4aa9c8;
 }
 .ele_fire {
-    border-color: #ff4848;
+    border-color: #c73939;
 }
 .ele_air {
-    border-color: #f77be2;
+    border-color: #cb63ba;
 }
 .ele_earth {
     border-color: #624b30;
 }
 .ele_light {
-    border-color: #ffff5a;
+    border-color: #e7e753;
 }
 .ele_dark {
     border-color: #000000;
@@ -139,12 +141,14 @@ html {
     border-width: 1px;
     border-color: #000000;
     margin-bottom: 10px;
-    background-color: #f9ebed;
+    background-color: #000000;
+    color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #button_filter:hover {
-    background-color: #f8b9ee;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 #zoomin,
@@ -163,9 +167,9 @@ html {
 #refresh:hover,
 #toggle_deck_info:hover,
 #hint:hover {
-    border: #ffa9e2 0px solid;
+    /* border: #ffa9e2 0px solid; */
     border-radius: 4px;
-    background-color: #f8b9ee;
+    background-color: #d4d4d4;
 }
 
 .card_header {
@@ -263,28 +267,33 @@ html {
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
+    font-size: 10px;
     border-color: #000000;
     margin-bottom: 10px;
-    background-color: #f9dfd7;
+    background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 #button_build:hover {
-    background-color: #e6a2a2;
+    background-color: #747474;
+    color: #ffffff;
 }
 #button_export {
     width: 50px;
     height: 30px;
+    font-size: 10px;
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
     border-color: #000000;
     margin-bottom: 10px;
-    background-color: #ffd4f9;
+    background-color: #000000;
+    color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-left: 5px;
 }
 #button_export:hover {
-    background-color: #c693b4;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 #popup_hint {
@@ -295,7 +304,7 @@ html {
     transform: translate(-50%, -50%);
     z-index: 2;
     max-height: 70%;
-    background-color: #f9dfd7;
+    background-color: #e3e3e3;
     border-radius: 10px;
     border-style: solid;
     border-width: 1px;
@@ -408,4 +417,7 @@ canvas {
 .card_information_bar_inline_image {
     width: 15px;
     height: 15px;
+}
+a {
+    white-space: nowrap;
 }

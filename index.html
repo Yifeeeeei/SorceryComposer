@@ -69,27 +69,6 @@
                 </li>
             </ul>
             <ul>
-                <strong>链接</strong>
-                <li>
-                    <a
-                        href="https://yifeeeeei.github.io/SorceryImages/GameRule.pdf"
-                        target="_blank"
-                        >Rules</a
-                    >: 查看游戏规则
-                </li>
-                <li>
-                    <a
-                        href="https://yifeeeeei.github.io/SorceryImages/update.txt"
-                        target="_blank"
-                        >Updates</a
-                    >: 查看更新日志
-                </li>
-                <li>
-                    <a href="./Arena/" target="_blank">ARENA!!!</a>:
-                    进入紧张刺激的<strong>竞技场</strong>!
-                </li>
-            </ul>
-            <ul>
                 <strong>如何使用过滤器</strong>
                 <li>
                     关键词过滤器：直接输入关键词，过滤留下在名称，标签，描述中包含关键词的卡牌
@@ -143,7 +122,7 @@
                         id="button_filter"
                         onclick="button_filter_clicked()"
                     >
-                        Filt!
+                        过滤
                     </button>
                     <img
                         src="./resources/zoomin.svg"
@@ -179,19 +158,25 @@
                         title="Show Hint"
                     />
                     <a
+                        href="https://yifeeeeei.github.io/DeckOfSorcery/"
+                        target="_blank"
+                        id="rules"
+                        >主页</a
+                    >
+                    <a
                         href="https://yifeeeeei.github.io/SorceryImages/GameRule.pdf"
                         target="_blank"
                         id="rules"
-                        >Rules</a
+                        >规则</a
                     >
                     <a
                         href="https://yifeeeeei.github.io/SorceryImages/update.txt"
                         target="_blank"
                         id="updates"
-                        >Updates</a
+                        >更新</a
                     >
                     <a href="./Arena/" target="_blank" id="go_to_arena"
-                        >ARENA!!!</a
+                        >竞技场</a
                     >
                 </div>
                 <div class="lower-part" id="collections">
@@ -215,27 +200,27 @@
                     <!-- Content for the upper right side goes here -->
                     <input type="text" id="input_deck_code" />
                     <button id="button_build" onclick="onclick_button_build()">
-                        Build
+                        导入
                     </button>
                     <button
                         id="button_export"
                         onclick="onclick_button_export()"
                     >
-                        Export
+                        导出
                     </button>
                 </div>
                 <div class="lower-part">
                     <!-- Content for the lower right side goes here -->
                     <p class="deck_header" id="main_header">
-                        <strong>MAIN 0/30</strong>
+                        <strong>主要卡组 0/30</strong>
                     </p>
                     <div id="deck_main"></div>
                     <p class="deck_header" id="ability_header">
-                        <strong>ABILITY 0/12</strong>
+                        <strong>技能卡组 0/12</strong>
                     </p>
                     <div id="deck_ability"></div>
                     <p class="deck_header" id="extra_header">
-                        <strong>EXTRA 0</strong>
+                        <strong>额外卡组 0</strong>
                     </p>
                     <div id="deck_extra"></div>
                 </div>
