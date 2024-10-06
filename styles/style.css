@@ -42,14 +42,14 @@ html {
 /* Upper and lower parts of the right side */
 .right-side .upper-part {
     height: 10%;
-    background-color: #ececec;
+    background-color: #f1f1f1;
     padding: 10px;
     border-bottom: #bcbcbc 1px solid;
 }
 
 .right-side .lower-part {
     height: 90%;
-    background-color: #ececec;
+    background-color: #f1f1f1;
     padding: 10px;
     overflow-y: auto;
 }
