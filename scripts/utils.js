@@ -435,7 +435,7 @@ function find_deck_for_card(card_info) {
         return "extra";
     } else if (card_info.type == "技能") {
         return "ability";
-    } else if (card_info.type == "生物" || card_info.type == "道具") {
+    } else if (card_info.type == "伙伴" || card_info.type == "道具") {
         return "main";
     } else {
         return "extra";
@@ -591,11 +591,11 @@ function get_deck_curve(card_infos) {
 }
 
 function get_deck_component(card_infos) {
-    let component_dict = { 生物: 0, 道具: 0, 装备: 0, 消耗品: 0, 地形: 0 };
+    let component_dict = { 伙伴: 0, 道具: 0, 装备: 0, 消耗品: 0, 地形: 0 };
     for (let i = 0; i < card_infos.length; i++) {
         let card_info = card_infos[i];
-        if (card_info.type === "生物") {
-            component_dict["生物"] += 1;
+        if (card_info.type === "伙伴") {
+            component_dict["伙伴"] += 1;
         } else {
             component_dict["道具"] += 1;
         }
