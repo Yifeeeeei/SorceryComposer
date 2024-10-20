@@ -281,7 +281,7 @@ function get_dummy_img_src(card_info) {
 }
 
 function get_image_src(card_info) {
-    return "https://yifeeeeei.github.io/SorceryImages/" + card_info.output_path;
+    return "https://yifeeeeei.github.io/ArcaneImages/" + card_info.output_path;
 }
 
 function get_img_element_by_card_info(card_info) {

@@ -6,7 +6,7 @@ async function setup() {
     // read the files
     // all_card_infos = await readJsonFile("resources/all_card_infos.json");
     all_card_infos = await readJsonFile(
-        "https://yifeeeeei.github.io/SorceryImages/output/all_card_infos.json"
+        "https://yifeeeeei.github.io/ArcaneImages/output/all_card_infos.json"
     );
     sort_cards_by_number(all_card_infos);
     console.log(all_card_infos.length, "all card infos read");
@@ -16,7 +16,7 @@ async function setup() {
     show_cards();
     // read the update cards
     update_card_numbers = await readJsonFile(
-        "https://yifeeeeei.github.io/SorceryImages/update.json"
+        "https://yifeeeeei.github.io/ArcaneImages/update.json"
     );
     if (update_card_numbers == null) {
         update_card_numbers = [];
