@@ -62,40 +62,40 @@ function check_deck() {
     note = {};
     if (current_deck["main"].length > 30) {
         check_result["main"] = false;
-    } else {
-        for (let i = 0; i < current_deck["main"].length; i++) {
-            number = current_deck["main"][i].number;
-            max_number_to_carry = parseInt(number[2]);
-            if (number in note) {
-                note[number] += 1;
-            } else {
-                note[number] = 1;
-            }
-            if (note[number] > max_number_to_carry) {
-                check_result["main"] = false;
-                check_result["warning_numbers"].push(number);
-            }
+    }
+    for (let i = 0; i < current_deck["main"].length; i++) {
+        number = current_deck["main"][i].number;
+        max_number_to_carry = parseInt(number[2]);
+        if (number in note) {
+            note[number] += 1;
+        } else {
+            note[number] = 1;
+        }
+        if (note[number] > max_number_to_carry) {
+            check_result["main"] = false;
+            check_result["warning_numbers"].push(number);
         }
     }
+
     // check ability
     if (current_deck["ability"].length > 10) {
         check_result["ability"] = false;
-    } else {
-        note = {};
-        for (let i = 0; i < current_deck["ability"].length; i++) {
-            number = current_deck["ability"][i].number;
-            max_number_to_carry = parseInt(number[2]);
-            if (number in note) {
-                note[number] += 1;
-            } else {
-                note[number] = 1;
-            }
-            if (note[number] > max_number_to_carry) {
-                check_result["ability"] = false;
-                check_result["warning_numbers"].push(number);
-            }
+    }
+    note = {};
+    for (let i = 0; i < current_deck["ability"].length; i++) {
+        number = current_deck["ability"][i].number;
+        max_number_to_carry = parseInt(number[2]);
+        if (number in note) {
+            note[number] += 1;
+        } else {
+            note[number] = 1;
+        }
+        if (note[number] > max_number_to_carry) {
+            check_result["ability"] = false;
+            check_result["warning_numbers"].push(number);
         }
     }
+
     return check_result;
 }
 
