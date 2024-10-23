@@ -48,7 +48,12 @@ function mouseout_card_name_element(event) {
 }
 
 function check_deck() {
-    check_result = { hero: true, main: true, ability: true };
+    check_result = {
+        hero: true,
+        main: true,
+        ability: true,
+        warning_numbers: [],
+    };
     // check hero
     if (current_deck["hero"].length > 1) {
         check_result["hero"] = false;
@@ -68,7 +73,7 @@ function check_deck() {
             }
             if (note[number] > max_number_to_carry) {
                 check_result["main"] = false;
-                break;
+                check_result["warning_numbers"].push(number);
             }
         }
     }
@@ -87,7 +92,7 @@ function check_deck() {
             }
             if (note[number] > max_number_to_carry) {
                 check_result["ability"] = false;
-                break;
+                check_result["warning_numbers"].push(number);
             }
         }
     }
@@ -97,6 +102,7 @@ function check_deck() {
 function show_decks() {
     const deck_elements = [deck_hero, deck_main, deck_ability, deck_extra];
     const deck_list = ["hero", "main", "ability", "extra"];
+    check_result = check_deck();
     for (let i = 0; i < deck_list.length; i++) {
         deck_elements[i].innerHTML = "";
         for (let j = 0; j < current_deck[deck_list[i]].length; j++) {
@@ -123,6 +129,10 @@ function show_decks() {
                 card_name_ele.innerHTML += " ✡";
             }
             card_name_ele.className = "deck_card";
+            if (check_result["warning_numbers"].includes(card_info.number)) {
+                console.log("warning");
+                card_name_ele.classList.add("warning");
+            }
             deck_card_container.appendChild(card_name_ele);
             let deck_minus_button = document.createElement("button");
             deck_minus_button.innerHTML = "-";
@@ -136,7 +146,7 @@ function show_decks() {
             deck_elements[i].appendChild(deck_card_container);
         }
     }
-    check_result = check_deck();
+
     document.getElementById("hero_header").innerHTML =
         "<strong>" + "人物 " + current_deck["hero"].length + "/1" + "</strong>";
     if (check_result["hero"]) {
