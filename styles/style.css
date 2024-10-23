@@ -421,3 +421,7 @@ canvas {
 a {
     white-space: nowrap;
 }
+
+.warning {
+    color: red;
+}

@@ -47,6 +47,53 @@ function mouseout_card_name_element(event) {
     hide_element(popup_img);
 }
 
+function check_deck() {
+    check_result = { hero: true, main: true, ability: true };
+    // check hero
+    if (current_deck["hero"].length > 1) {
+        check_result["hero"] = false;
+    }
+    // check main
+    note = {};
+    if (current_deck["main"].length > 30) {
+        check_result["main"] = false;
+    } else {
+        for (let i = 0; i < current_deck["main"].length; i++) {
+            number = current_deck["main"][i].number;
+            max_number_to_carry = parseInt(number[2]);
+            if (number in note) {
+                note[number] += 1;
+            } else {
+                note[number] = 1;
+            }
+            if (note[number] > max_number_to_carry) {
+                check_result["main"] = false;
+                break;
+            }
+        }
+    }
+    // check ability
+    if (current_deck["ability"].length > 10) {
+        check_result["ability"] = false;
+    } else {
+        note = {};
+        for (let i = 0; i < current_deck["ability"].length; i++) {
+            number = current_deck["ability"][i].number;
+            max_number_to_carry = parseInt(number[2]);
+            if (number in note) {
+                note[number] += 1;
+            } else {
+                note[number] = 1;
+            }
+            if (note[number] > max_number_to_carry) {
+                check_result["ability"] = false;
+                break;
+            }
+        }
+    }
+    return check_result;
+}
+
 function show_decks() {
     const deck_elements = [deck_hero, deck_main, deck_ability, deck_extra];
     const deck_list = ["hero", "main", "ability", "extra"];
@@ -89,12 +136,28 @@ function show_decks() {
             deck_elements[i].appendChild(deck_card_container);
         }
     }
+    check_result = check_deck();
     document.getElementById("hero_header").innerHTML =
         "<strong>" +
         "人物 " +
         current_deck["hero"].length +
         "/30" +
         "</strong>";
+    if (check_result["hero"]) {
+        if (
+            document.getElementById("hero_header").classList.contains("warning")
+        ) {
+            document.getElementById("hero_header").classList.remove("warning");
+        }
+    } else {
+        if (
+            !document
+                .getElementById("hero_header")
+                .classList.contains("warning")
+        ) {
+            document.getElementById("hero_header").classList.add("warning");
+        }
+    }
 
     document.getElementById("main_header").innerHTML =
         "<strong>" +
@@ -102,12 +165,47 @@ function show_decks() {
         current_deck["main"].length +
         "/30" +
         "</strong>";
+    if (check_result["main"]) {
+        if (
+            document.getElementById("main_header").classList.contains("warning")
+        ) {
+            document.getElementById("main_header").classList.remove("warning");
+        }
+    } else {
+        if (
+            !document
+                .getElementById("main_header")
+                .classList.contains("warning")
+        ) {
+            document.getElementById("main_header").classList.add("warning");
+        }
+    }
+
     document.getElementById("ability_header").innerHTML =
         "<strong>" +
         "技能卡组 " +
         current_deck["ability"].length +
         "/10" +
         "</strong>";
+    if (check_result["ability"]) {
+        if (
+            document
+                .getElementById("ability_header")
+                .classList.contains("warning")
+        ) {
+            document
+                .getElementById("ability_header")
+                .classList.remove("warning");
+        }
+    } else {
+        if (
+            !document
+                .getElementById("ability_header")
+                .classList.contains("warning")
+        ) {
+            document.getElementById("ability_header").classList.add("warning");
+        }
+    }
     document.getElementById("extra_header").innerHTML =
         "<strong>" + "额外卡组 " + current_deck["extra"].length + "</strong>";
     show_deck_info();
