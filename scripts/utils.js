@@ -138,11 +138,7 @@ function show_decks() {
     }
     check_result = check_deck();
     document.getElementById("hero_header").innerHTML =
-        "<strong>" +
-        "人物 " +
-        current_deck["hero"].length +
-        "/30" +
-        "</strong>";
+        "<strong>" + "人物 " + current_deck["hero"].length + "/1" + "</strong>";
     if (check_result["hero"]) {
         if (
             document.getElementById("hero_header").classList.contains("warning")
