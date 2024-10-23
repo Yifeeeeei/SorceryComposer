@@ -34,6 +34,7 @@ async function setup() {
     // set shader
     shader = document.getElementById("shader");
     // set decks
+    deck_hero = document.getElementById("deck_hero");
     deck_main = document.getElementById("deck_main");
     deck_ability = document.getElementById("deck_ability");
     deck_extra = document.getElementById("deck_extra");

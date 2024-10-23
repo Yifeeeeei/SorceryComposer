@@ -48,8 +48,8 @@ function mouseout_card_name_element(event) {
 }
 
 function show_decks() {
-    const deck_elements = [deck_main, deck_ability, deck_extra];
-    const deck_list = ["main", "ability", "extra"];
+    const deck_elements = [deck_hero, deck_main, deck_ability, deck_extra];
+    const deck_list = ["hero", "main", "ability", "extra"];
     for (let i = 0; i < 3; i++) {
         deck_elements[i].innerHTML = "";
         for (let j = 0; j < current_deck[deck_list[i]].length; j++) {
@@ -89,6 +89,13 @@ function show_decks() {
             deck_elements[i].appendChild(deck_card_container);
         }
     }
+    document.getElementById("hero_header").innerHTML =
+        "<strong>" +
+        "人物 " +
+        current_deck["hero"].length +
+        "/30" +
+        "</strong>";
+
     document.getElementById("main_header").innerHTML =
         "<strong>" +
         "主要卡组 " +
@@ -109,7 +116,7 @@ function show_decks() {
 function onclick_button_build(event) {
     const card_numbers = decode(input_deck_code.value);
     console.log(card_numbers);
-    current_deck = { main: [], ability: [], extra: [] };
+    current_deck = { hero: [], main: [], ability: [], extra: [] };
     for (let i = 0; i < card_numbers.length; i++) {
         if (card_number_to_idx[card_numbers[i]] == undefined) {
             alert("Invalid deck code!");
@@ -119,6 +126,7 @@ function onclick_button_build(event) {
         const deck = find_deck_for_card(card_info);
         current_deck[deck].push(card_info);
     }
+    sort_cards_by_number(current_deck["hero"]);
     sort_cards_by_number(current_deck["main"]);
     sort_cards_by_number(current_deck["ability"]);
     sort_cards_by_number(current_deck["extra"]);
@@ -128,6 +136,10 @@ function onclick_button_build(event) {
 function onclick_button_export(event) {
     let card_numbers = [];
     let encoded = "";
+    for (let i = 0; i < current_deck["hero"].length; i++) {
+        card_numbers.push(current_deck["hero"][i].number);
+    }
+    encoded = encode(card_numbers) + " // ";
     for (let i = 0; i < current_deck["main"].length; i++) {
         card_numbers.push(current_deck["main"][i].number);
     }
@@ -431,7 +443,9 @@ function onclick_shader(event) {
 
 function find_deck_for_card(card_info) {
     // 衍生物第三位为0
-    if (card_info.number[2] == 0) {
+    if (card_info.number[0] == 4) {
+        return "hero";
+    } else if (card_info.number[2] == 0) {
         return "extra";
     } else if (card_info.type == "技能") {
         return "ability";
