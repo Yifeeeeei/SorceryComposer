@@ -10,6 +10,10 @@ function arena_weight_function_for_main_deck(card_info) {
     return w;
 }
 
+function check_deck() {
+    return { hero: true, main: true, ability: true, warning_numbers: [] };
+}
+
 function arena_weight_function_for_ability_deck(card_info) {
     let w = 1;
     if (is_legend(card_info)) {
@@ -23,7 +27,7 @@ function arena_weight_function_for_ability_deck(card_info) {
 
 // filter function for arena
 function arena_filter_hero(card_info) {
-    return card_info.type === "英雄" && card_info.category != "?";
+    return card_info.number[0] === "4" && card_info.number[1] != "0";
 }
 
 function arena_filter_deck_on_element(deck_name, target_element, card_info) {

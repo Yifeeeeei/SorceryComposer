@@ -48,6 +48,7 @@ async function arena_wait_till_card_added(interval = 100) {
 
 // this function choose the corresponding cards and displays them
 function arena_prepare_candidates(filter_function, weight_function = null) {
+    console.log("prepare candidates");
     ok_card_infos = [];
     for (let i = 0; i < all_card_infos.length; i++) {
         if (filter_function(all_card_infos[i])) {
@@ -146,9 +147,9 @@ function onclick_add_button(event) {
 // overwrite show_decks() function
 
 function show_decks() {
-    const deck_elements = [deck_main, deck_ability, deck_extra];
-    const deck_list = ["main", "ability", "extra"];
-    for (let i = 0; i < 3; i++) {
+    const deck_elements = [deck_hero, deck_main, deck_ability, deck_extra];
+    const deck_list = ["hero", "main", "ability", "extra"];
+    for (let i = 0; i < deck_list.length; i++) {
         deck_elements[i].innerHTML = "";
         for (let j = 0; j < current_deck[deck_list[i]].length; j++) {
             const card_info = current_deck[deck_list[i]][j];
@@ -188,6 +189,8 @@ function show_decks() {
             deck_elements[i].appendChild(deck_card_container);
         }
     }
+    document.getElementById("hero_header").innerHTML =
+        "<strong>" + "人物 " + current_deck["hero"].length + "/1" + "</strong>";
     document.getElementById("main_header").innerHTML =
         "<strong>" +
         "主要卡组 " +

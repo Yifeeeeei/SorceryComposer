@@ -21,6 +21,7 @@ async function setup() {
     deck_main = document.getElementById("deck_main");
     deck_ability = document.getElementById("deck_ability");
     deck_extra = document.getElementById("deck_extra");
+    deck_hero = document.getElementById("deck_hero");
     // set up input_deck_code
     input_deck_code = document.getElementById("input_deck_code");
     // set up button_build
