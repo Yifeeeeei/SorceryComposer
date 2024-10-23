@@ -97,7 +97,7 @@ function check_deck() {
 function show_decks() {
     const deck_elements = [deck_hero, deck_main, deck_ability, deck_extra];
     const deck_list = ["hero", "main", "ability", "extra"];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < deck_list.length; i++) {
         deck_elements[i].innerHTML = "";
         for (let j = 0; j < current_deck[deck_list[i]].length; j++) {
             const card_info = current_deck[deck_list[i]][j];
