@@ -244,6 +244,7 @@ function onclick_button_export(event) {
         card_numbers.push(current_deck["hero"][i].number);
     }
     encoded = encode(card_numbers) + " // ";
+    card_numbers = [];
     for (let i = 0; i < current_deck["main"].length; i++) {
         card_numbers.push(current_deck["main"][i].number);
     }
