@@ -31,6 +31,20 @@ function decode(encoded) {
 // this function will display all cards in displaying_card_infos onto the page
 function show_cards() {
     document.getElementById("collections_list").innerHTML = "";
+    // sort displaying_card_infos by number
+    displaying_card_infos.sort((a, b) => {
+        // hero cards goes first, than number
+        if (a.number[0] == 4 && b.number[0] == 4) {
+            return a.number - b.number;
+        } else if (a.number[0] == 4) {
+            return -1;
+        } else if (b.number[0] == 4) {
+            return 1;
+        } else {
+            return a.number - b.number;
+        }
+    });
+
     for (let i = 0; i < displaying_card_infos.length; i++) {
         const card_info = displaying_card_infos[i];
         let card_ele = get_card_element_by_card_info(card_info, i);
