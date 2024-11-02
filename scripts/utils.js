@@ -246,8 +246,8 @@ function onclick_button_build(event) {
     current_deck = { hero: [], main: [], ability: [], extra: [] };
     for (let i = 0; i < card_numbers.length; i++) {
         if (card_number_to_idx[card_numbers[i]] == undefined) {
-            alert("Invalid deck code!");
-            return;
+            alert("Invalid deck code! " + card_numbers[i] + " is not a card!");
+            continue;
         }
         const card_info = all_card_infos[card_number_to_idx[card_numbers[i]]];
         const deck = find_deck_for_card(card_info);
