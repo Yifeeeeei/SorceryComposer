@@ -86,6 +86,8 @@ async function setup() {
     hide_element(document.getElementById("deck_info"));
     // focus on the filter input
     input_filt.focus();
+    // set up initial deck code if any
+    set_up_initial_deck_code();
 }
 
 function main() {

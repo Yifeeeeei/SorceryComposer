@@ -2,6 +2,15 @@ function hello_utils() {
     console.log("Hello from utils.js");
 }
 
+function set_up_initial_deck_code() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const deck_code = urlParams.get("code");
+    if (deck_code) {
+        input_deck_code.value = deck_code;
+        onclick_button_build();
+    }
+}
+
 function encode(numbers) {
     // join by space
     let encoded = numbers.join(" ");
