@@ -260,7 +260,7 @@ function onclick_button_build(event) {
     show_decks();
 }
 
-function onclick_button_export(event) {
+function get_current_deck_code() {
     let card_numbers = [];
     let encoded = "";
     for (let i = 0; i < current_deck["hero"].length; i++) {
@@ -282,6 +282,11 @@ function onclick_button_export(event) {
         card_numbers.push(current_deck["extra"][i].number);
     }
     encoded = encoded + encode(card_numbers);
+    return encoded;
+}
+
+function onclick_button_export(event) {
+    encoded = get_current_deck_code();
 
     input_deck_code.value = encoded;
 
@@ -874,5 +879,8 @@ function toggle_deck_info_onclick() {
 }
 
 function onclick_refresh() {
-    window.location.reload(true);
+    url =
+        "https://yifeeeeei.github.io/ArcaneComposer/?code=" +
+        get_current_deck_code();
+    window.location.assign(url);
 }
