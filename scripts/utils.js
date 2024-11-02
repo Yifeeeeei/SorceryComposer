@@ -494,13 +494,13 @@ function set_zoom_text(card_info) {
         card_info.category,
         card_info.elements_cost
     );
-    html_template += `<li><strong>条件:</strong> ${zoom_cost_str}</li>`;
+    html_template += `<li><strong>入场花费:</strong> ${zoom_cost_str}</li>`;
     let zoom_expense_str = get_zoom_elements_str(
         card_info.category,
         card_info.elements_expense
     );
     if (zoom_expense_str != "") {
-        html_template += `<li><strong>代价:</strong> ${zoom_expense_str}</li>`;
+        html_template += `<li><strong>使用花费:</strong> ${zoom_expense_str}</li>`;
     }
     let zoom_gain_str = get_zoom_elements_str(
         card_info.category,
