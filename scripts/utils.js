@@ -104,6 +104,7 @@ function check_deck() {
     if (current_deck["ability"].length > 10) {
         check_result["ability"] = false;
     }
+    has_legendary_ability = false;
     note = {};
     for (let i = 0; i < current_deck["ability"].length; i++) {
         number = current_deck["ability"][i].number;
@@ -116,6 +117,14 @@ function check_deck() {
         if (note[number] > max_number_to_carry) {
             check_result["ability"] = false;
             check_result["warning_numbers"].push(number);
+        }
+
+        if (is_legend(current_deck["ability"][i])) {
+            if (has_legendary_ability) {
+                check_result["ability"] = false;
+                check_result["warning_numbers"].push(number);
+            }
+            has_legendary_ability = true;
         }
     }
 
