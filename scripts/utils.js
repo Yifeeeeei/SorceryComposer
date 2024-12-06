@@ -437,7 +437,6 @@ function get_img_element_by_card_info(card_info) {
     // img_element.src = get_dummy_img_src(card_info);
     img_element.src = get_image_src(card_info);
     img_element.setAttribute("card_number", card_info.number);
-    img_element.onclick = onclick_element_show_detail;
     return img_element;
 }
 
