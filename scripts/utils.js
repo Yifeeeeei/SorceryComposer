@@ -101,14 +101,18 @@ function check_deck() {
     }
 
     // check ability
+    // 1. you cannot have two abilities with the same number
+    // 2. you cannot have more than 10 abilities
+    // 3. you cannot have more than 1 legendary ability
     if (current_deck["ability"].length > 10) {
         check_result["ability"] = false;
     }
     has_legendary_ability = false;
     note = {};
+    carried_legends = [];
     for (let i = 0; i < current_deck["ability"].length; i++) {
         number = current_deck["ability"][i].number;
-        max_number_to_carry = parseInt(number[2]);
+        max_number_to_carry = 1;
         if (number in note) {
             note[number] += 1;
         } else {
@@ -120,9 +124,12 @@ function check_deck() {
         }
 
         if (is_legend(current_deck["ability"][i])) {
+            carried_legends.push(number);
             if (has_legendary_ability) {
                 check_result["ability"] = false;
-                check_result["warning_numbers"].push(number);
+                // add all numbers in carried_legends to warning_numbers
+                check_result["warning_numbers"] =
+                    check_result["warning_numbers"].concat(carried_legends);
             }
             has_legendary_ability = true;
         }
@@ -147,7 +154,7 @@ function show_decks() {
             card_name_ele.setAttribute("card_number", card_info.number);
             card_name_ele.setAttribute("img_src", get_image_src(card_info));
             card_name_ele.innerHTML = card_info.name;
-            card_name_ele.onclick = onclick_deck_card_name;
+            card_name_ele.onclick = onclick_element_show_detail;
             card_name_ele.addEventListener(
                 "mouseover",
                 mouseover_card_name_element
@@ -305,20 +312,6 @@ function onclick_button_export(event) {
     // alert("Deck code copied to clipboard!");
 }
 
-function onclick_deck_card_name(event) {
-    // clear shader's children
-    show_element(shader);
-    shader.innerHTML = "";
-    let card_src = event.target.getAttribute("img_src");
-    zoom_img.src = card_src;
-    set_zoom_text(
-        get_card_info_by_number(event.target.getAttribute("card_number"))
-    );
-    show_element(zoom_info);
-    show_element(zoom_img);
-    show_element(zoom_text);
-}
-
 function onclick_deck_minus_button(event) {
     const deck_name = event.target.getAttribute("deck_name");
     const idx = event.target.getAttribute("idx");
@@ -444,7 +437,7 @@ function get_img_element_by_card_info(card_info) {
     // img_element.src = get_dummy_img_src(card_info);
     img_element.src = get_image_src(card_info);
     img_element.setAttribute("card_number", card_info.number);
-    img_element.onclick = onclick_img_element;
+    img_element.onclick = onclick_element_show_detail;
     return img_element;
 }
 
@@ -560,15 +553,17 @@ function set_zoom_text(card_info) {
     zoom_text.innerHTML = html_template;
 }
 
-function onclick_img_element(event) {
+function onclick_element_show_detail(event) {
+    // this would require element to have card_number attribute
     // clear shader's children
     show_element(shader);
     shader.innerHTML = "";
-    let card_src = event.target.src;
-    zoom_img.src = card_src;
-    set_zoom_text(
-        get_card_info_by_number(event.target.getAttribute("card_number"))
+    let card_info = get_card_info_by_number(
+        get_card_number_from_element(event.target)
     );
+    let card_src = get_image_src(card_info);
+    zoom_img.src = card_src;
+    set_zoom_text(card_info);
     show_element(zoom_info);
     show_element(zoom_img);
     show_element(zoom_text);
@@ -633,6 +628,8 @@ function onclick_add_button(event) {
         sort_cards_by_number(current_deck[spawn_deck]);
     }
     show_decks();
+    // block onclick event being passed to parent elements
+    event.stopPropagation();
 }
 
 function get_header_element_by_card_info(card_info, idx) {
@@ -653,6 +650,19 @@ function get_header_element_by_card_info(card_info, idx) {
     header_div.appendChild(name_div);
     header_div.appendChild(add_button);
     return header_div;
+}
+
+function get_card_number_from_element(card_element) {
+    // if element is body, return null
+    if (card_element.tagName == "BODY") {
+        return null;
+    }
+    // if element has card_number attribute, return it
+    if (card_element.getAttribute("card_number")) {
+        return card_element.getAttribute("card_number");
+    }
+    // if not, check its parent
+    return get_card_number_from_element(card_element.parentElement);
 }
 
 function get_card_element_by_card_info(card_info, idx) {
@@ -683,6 +693,8 @@ function get_card_element_by_card_info(card_info, idx) {
     if (img_element) {
         card_div.appendChild(img_element);
     }
+    card_div.setAttribute("card_number", card_info.number);
+    card_div.onclick = onclick_element_show_detail;
     return card_div;
 }
 
