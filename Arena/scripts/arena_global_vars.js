@@ -13,3 +13,18 @@ var element_placeholders = {
     无: "../resources/placeholders/ele_none.png",
     // "?": "resources/placeholders/ele_none.png",
 };
+
+var description_placeholders = {
+    "\\光": "../resources/placeholders/ele_light.png",
+    "\\暗": "../resources/placeholders/ele_dark.png",
+    "\\水": "../resources/placeholders/ele_water.png",
+    "\\火": "../resources/placeholders/ele_fire.png",
+    "\\地": "../resources/placeholders/ele_earth.png",
+    "\\气": "../resources/placeholders/ele_air.png",
+    "\\无": "../resources/placeholders/ele_none.png",
+    // "\\?": "resources/placeholders/ele_none.png",
+    "\\攻": "../resources/placeholders/attack.png",
+    "\\持": "../resources/placeholders/duration.png",
+    "\\血": "../resources/placeholders/life.png",
+    "\\威": "../resources/placeholders/power.png",
+};

@@ -142,6 +142,9 @@ function onclick_add_button(event) {
     show_cards();
     // inform a card is chosen
     arena_card_info_added = card_info;
+
+    // block onclick event being passed to parent elements
+    event.stopPropagation();
 }
 
 // overwrite show_decks() function
@@ -161,7 +164,7 @@ function show_decks() {
             card_name_ele.setAttribute("card_number", card_info.number);
             card_name_ele.setAttribute("img_src", get_image_src(card_info));
             card_name_ele.innerHTML = card_info.name;
-            card_name_ele.onclick = onclick_deck_card_name;
+            card_name_ele.onclick = onclick_element_show_detail;
             card_name_ele.addEventListener(
                 "mouseover",
                 mouseover_card_name_element
