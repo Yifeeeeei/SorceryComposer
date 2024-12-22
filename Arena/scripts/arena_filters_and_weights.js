@@ -4,7 +4,7 @@ function arena_weight_function_for_main_deck(card_info) {
     if (is_legend(card_info)) {
         w = w * 0.4;
     }
-    if (card_info.category == "无") {
+    if (card_info.number[1] == "0") {
         w = w * 0.3;
     }
     return w;
@@ -19,7 +19,7 @@ function arena_weight_function_for_ability_deck(card_info) {
     if (is_legend(card_info)) {
         w = w * 0.4;
     }
-    if (card_info.category == "?") {
+    if (card_info.number[1] == "0") {
         w = w * 0.3;
     }
     return w;
@@ -33,7 +33,7 @@ function arena_filter_hero(card_info) {
 function arena_filter_deck_on_element(deck_name, target_element, card_info) {
     if (
         find_deck_for_card(card_info) == deck_name &&
-        (card_info.category == target_element || card_info.category == "?")
+        (card_info.category == target_element || card_info.category == "无")
     ) {
         return true;
     }
